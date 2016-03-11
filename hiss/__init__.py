@@ -3,34 +3,41 @@ import pygame, time, random
 # random is for random numbers.
 
 sprites = [] # List of sprites
-
+    
 class Stage():
-    def __init__(self, name):
-        self.name = name
+    def __init__(self):
         self.costumes = []
         self.currentCostume = False
 
     def addCostume(self, costumePath):
         costume = pygame.image.load(costumePath)
-        self.costumes.append(costume) 
+        self.costumes.append(costume)
 
 class Sprite(Stage):
-    def __init__(self, name):
-        Stage.__init__(self, name)
+    def __init__(self, name="Default Name"):
+        Stage.__init__(self)
+        self.name = name
         self.xpos = 0
         self.ypos = 0
         self.direction = 0 # Default is 0, not 90 - it makes more sense
-        self.show = True
+        self.showing = True
         sprites.append(self)
+        
+    def show(self):
+        self.show = True
+        
+    def hide(self):
+        self.show = False
     
-def initialize():
-    pygame.init()
-    hissStage = Stage()
-    screen = pygame.display.set_mode((800, 600)) # Add customizable dimensions later on?
-    caption = pygame.display.set_caption("Hiss Project")
-    time.clock()
-    # time.clock() (after being called once) will return how long it's been since time.clock() was first called
+pygame.init()
+hissStage = Stage()
+screen = pygame.display.set_mode((800, 600)) # Add customizable dimensions later on?
+caption = pygame.display.set_caption("Hiss Project")
+time.clock()
 
 def blit():
     for obj in sprites:
-        pass # Expand later
+        if obj.showing:
+            screen.blit(obj.currentCostume, (obj.xpos, obj.ypos))
+
+    pygame.display.flip()
