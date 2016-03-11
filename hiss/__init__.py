@@ -8,7 +8,7 @@ class Stage():
     def __init__(self):
         self.costumes = []
         self.currentCostume = False
-        self.bgColor = (0, 0, 0)
+        self.bgColor = (255, 255, 255)
 
     def addCostume(self, costumePath):
         costume = pygame.image.load(costumePath)
@@ -29,7 +29,7 @@ class Sprite(Stage):
         
     def hide(self):
         self.show = False
-    
+ 
 pygame.init()
 hissStage = Stage()
 screen = pygame.display.set_mode((800, 600)) # Add customizable dimensions later on?
@@ -38,6 +38,7 @@ time.clock()
 
 def blit():
     screen.fill(hissStage.bgColor)
+    
     for obj in sprites:
         if obj.showing:
             screen.blit(obj.currentCostume, (obj.xpos, obj.ypos))
