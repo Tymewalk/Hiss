@@ -1,4 +1,4 @@
-import hiss
+import hiss, pygame
 
 newSprite = hiss.Sprite()
 newSprite.addCostume("SOS.png")
