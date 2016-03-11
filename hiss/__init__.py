@@ -1,4 +1,6 @@
 import pygame, time, random
+# time is for the timer.
+# random is for random numbers.
         
 class Stage():
     def __init__(self, name):
@@ -14,9 +16,13 @@ class Sprite(Stage):
         Stage.__init__(self, name)
         self.xpos = 0
         self.ypos = 0
+        self.direction = 0 # Default is 0, not 90 - it makes more sense
     
-def beginGame():
+def initialize():
     pygame.init()
-
     screen = pygame.display.set_mode((800, 600)) # Add customizable dimensions later on?
     caption = pygame.display.set_caption("Hiss Project")
+
+def begin():
+    time.clock()
+    # time.clock() (after being called once) will return how long it's been since time.clock() was first called
