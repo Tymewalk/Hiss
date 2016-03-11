@@ -1,9 +1,7 @@
 import pygame, time, random
 # time is for the timer.
 # random is for random numbers.
-
-sprites = [] # List of sprites
-
+        
 class Stage():
     def __init__(self, name):
         self.name = name
@@ -20,8 +18,6 @@ class Sprite(Stage):
         self.xpos = 0
         self.ypos = 0
         self.direction = 0 # Default is 0, not 90 - it makes more sense
-        self.show = True
-        sprites.append(self)
     
 def initialize():
     pygame.init()
@@ -30,7 +26,3 @@ def initialize():
     caption = pygame.display.set_caption("Hiss Project")
     time.clock()
     # time.clock() (after being called once) will return how long it's been since time.clock() was first called
-
-def blit():
-    for obj in sprites:
-        pass # Expand later
