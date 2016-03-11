@@ -8,6 +8,7 @@ class Stage():
     def __init__(self):
         self.costumes = []
         self.currentCostume = False
+        self.bgColor = (0, 0, 0)
 
     def addCostume(self, costumePath):
         costume = pygame.image.load(costumePath)
@@ -36,8 +37,10 @@ caption = pygame.display.set_caption("Hiss Project")
 time.clock()
 
 def blit():
+    screen.fill(hissStage.bgColor)
     for obj in sprites:
         if obj.showing:
             screen.blit(obj.currentCostume, (obj.xpos, obj.ypos))
 
     pygame.display.flip()
+    
