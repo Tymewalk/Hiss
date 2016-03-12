@@ -43,6 +43,16 @@ class Sprite(Stage):
     def changeYBy(self, amount):
         self.ypos += amount
 
+    def goTo(self, xpos, ypos):
+        self.xpos = xpos
+        self.ypos = ypos
+
+    def setXTo(self, xpos):
+        self.xpos = xpos
+
+    def setYTo(self, ypos):
+        self.ypos = ypos
+
 pygame.init()
 screen = pygame.display.set_mode((800, 600)) # Add customizable dimensions later on?
 caption = pygame.display.set_caption("Hiss Project")
