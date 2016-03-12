@@ -29,7 +29,13 @@ class Sprite(Stage):
         
     def hide(self):
         self.show = False
- 
+
+    def changeXBy(self, amount):
+        self.xpos += amount
+
+    def changeYBy(self, amount):
+        self.ypos += amount
+
 pygame.init()
 hissStage = Stage()
 screen = pygame.display.set_mode((800, 600)) # Add customizable dimensions later on?
