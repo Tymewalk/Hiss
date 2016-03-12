@@ -14,6 +14,13 @@ class Stage():
         costume = pygame.image.load(costumePath)
         self.costumes.append(costume)
 
+    def setColor(self, r, g, b):
+        self.bgColor = (r, g, b)
+
+
+hissStage = Stage()
+                                       
+
 class Sprite(Stage):
     def __init__(self, name="Default Name"):
         Stage.__init__(self)
@@ -37,7 +44,6 @@ class Sprite(Stage):
         self.ypos += amount
 
 pygame.init()
-hissStage = Stage()
 screen = pygame.display.set_mode((800, 600)) # Add customizable dimensions later on?
 caption = pygame.display.set_caption("Hiss Project")
 time.clock()
