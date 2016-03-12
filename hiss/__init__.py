@@ -7,6 +7,7 @@ sprites = [] # List of sprites
 class Stage():
     def __init__(self):
         self.costumes = []
+        self.costumeNumber = 0
         self.currentCostume = False
         self.bgColor = (255, 255, 255)
 
@@ -17,6 +18,10 @@ class Stage():
     def setColor(self, r, g, b):
         self.bgColor = (r, g, b)
 
+    def setCostumeByNumber(self, number):
+        if number < len(self.costumes):
+            self.currentCostume = self.costumes[number]
+
 
 hissStage = Stage()
                                        
@@ -24,7 +29,7 @@ hissStage = Stage()
 class Sprite(Stage):
     def __init__(self, name="Default Name"):
         Stage.__init__(self)
-        self.name = name
+        self.name = name # Why is this here?
         self.xpos = 0
         self.ypos = 0
         self.direction = 0 # Default is 0, not 90 - it makes more sense

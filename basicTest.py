@@ -2,7 +2,7 @@ import hiss, pygame, time
 
 newSprite = hiss.Sprite()
 newSprite.addCostume("SOS.png")
-newSprite.currentCostume = newSprite.costumes[0] # TODO: Make "change costume" block
+newSprite.setCostumeByNumber(0) # TODO: Make "change costume" block
 
 hiss.hissStage.setColor(255, 0, 0)
 
