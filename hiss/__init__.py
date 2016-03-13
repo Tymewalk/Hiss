@@ -11,12 +11,14 @@ class Stage():
         self.currentCostume = False
         self.bgColor = (255, 255, 255)
 
+    # Stage-specific functions
+    def setColor(self, r, g, b):
+        self.bgColor = (r, g, b)
+
+    # Functions shared by sprites
     def addCostume(self, costumePath, costumeName):
         costume = pygame.image.load(costumePath)
         self.costumes[costumeName] = costume
-
-    def setColor(self, r, g, b):
-        self.bgColor = (r, g, b)
 
     def setCostumeByName(self, name):
         if name in self.costumes:
