@@ -34,6 +34,7 @@ class Sprite(Stage):
         self.ypos = 0
         self.direction = 0 # Default is 0, not 90 - it makes more sense
         self.showing = True
+        self.scale = 1 # How much to multiply it by in the scale
         sprites.append(self)
         
     def show(self):
@@ -57,6 +58,12 @@ class Sprite(Stage):
 
     def setYTo(self, ypos):
         self.ypos = ypos
+
+    def changeScaleBy(self, amount):
+        self.scale += amount
+
+    def setScaleTo(self, scale):
+        self.scale = scale
 
 pygame.init()
 screen = pygame.display.set_mode((800, 600)) # Add customizable dimensions later on?
