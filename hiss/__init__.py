@@ -6,21 +6,21 @@ sprites = [] # List of sprites
     
 class Stage():
     def __init__(self):
-        self.costumes = []
+        self.costumes = {}
         self.costumeNumber = 0
         self.currentCostume = False
         self.bgColor = (255, 255, 255)
 
-    def addCostume(self, costumePath):
+    def addCostume(self, costumePath, costumeName):
         costume = pygame.image.load(costumePath)
-        self.costumes.append(costume)
+        self.costumes[costumeName] = costume
 
     def setColor(self, r, g, b):
         self.bgColor = (r, g, b)
 
-    def setCostumeByNumber(self, number):
-        if number < len(self.costumes):
-            self.currentCostume = self.costumes[number]
+    def setCostumeByName(self, name):
+        if name in self.costumes:
+            self.currentCostume = self.costumes[name]
 
 
 hissStage = Stage()

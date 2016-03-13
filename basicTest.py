@@ -1,12 +1,12 @@
 import hiss, pygame, time
 
 SOS = hiss.Sprite()
-SOS.addCostume("SOS.png")
-SOS.setCostumeByNumber(0)
+SOS.addCostume("SOS.png", "avatar")
+SOS.setCostumeByName("avatar")
 
 SoExcited = hiss.Sprite()
-SoExcited.addCostume("SoExcited.png")
-SoExcited.setCostumeByNumber(0)
+SoExcited.addCostume("SoExcited.png", "avatar")
+SoExcited.setCostumeByName("avatar")
 
 SoExcited.goTo(300, 300)
 SoExcited.setScaleTo(0.33)
