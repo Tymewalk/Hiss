@@ -23,6 +23,7 @@ class Stage():
     def setCostumeByName(self, name):
         if name in self.costumes:
             self.currentCostume = self.costumes[name]
+            self.costumeNumber = self.costumes.keys().index(name)
 
 
 hissStage = Stage()
