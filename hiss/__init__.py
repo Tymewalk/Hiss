@@ -37,10 +37,10 @@ class Sprite(Stage):
         sprites.append(self)
         
     def show(self):
-        self.show = True
+        self.showing = True
         
     def hide(self):
-        self.show = False
+        self.showing = False
 
     def changeXBy(self, amount):
         self.xpos += amount
@@ -66,7 +66,7 @@ class Sprite(Stage):
 
     def isVisible(self):
         '''Check if the object is visible, not just showing.'''
-        return self.show and self.scale > 0
+        return self.showing and self.scale > 0
 
 pygame.init()
 screen = pygame.display.set_mode((800, 600)) # Add customizable dimensions later on?
