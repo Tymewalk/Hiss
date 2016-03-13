@@ -9,8 +9,7 @@ SoExcited.addCostume("SoExcited.png")
 SoExcited.setCostumeByNumber(0)
 
 SoExcited.goTo(300, 300)
-
-
+SoExcited.setScaleTo(0.33)
 
 hiss.hissStage.setColor(255, 0, 0)
 

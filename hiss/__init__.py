@@ -24,7 +24,6 @@ class Stage():
 
 
 hissStage = Stage()
-                                       
 
 class Sprite(Stage):
     def __init__(self, name="Default Name"):
@@ -65,6 +64,10 @@ class Sprite(Stage):
     def setScaleTo(self, scale):
         self.scale = scale
 
+    def isVisible(self):
+        '''Check if the object is visible, not just showing.'''
+        return self.show and self.scale > 0
+
 pygame.init()
 screen = pygame.display.set_mode((800, 600)) # Add customizable dimensions later on?
 caption = pygame.display.set_caption("Hiss Project")
@@ -74,8 +77,13 @@ def blit():
     screen.fill(hissStage.bgColor)
     
     for obj in sprites:
-        if obj.showing:
-            screen.blit(obj.currentCostume, (obj.xpos, obj.ypos))
+        if obj.isVisible():
+            # Now that we know the object's showing, do calculations and stuff
+            image = obj.currentCostume # So we can modify it
+            if not obj.scale == 1: # Don't do anything if it's a scale of 1
+                imageSize = image.get_size()
+                image = pygame.transform.scale(image, (int(imageSize[0] * obj.scale), int(imageSize[1] * obj.scale)))
+            screen.blit(image, (obj.xpos, obj.ypos))
 
     pygame.display.flip()
     
