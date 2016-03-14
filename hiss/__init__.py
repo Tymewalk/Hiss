@@ -8,6 +8,7 @@ class Stage():
     def __init__(self):
         self.costumes = {}
         self.costumeNumber = 0
+        self.costumeName = ""
         self.currentCostume = False
         self.bgColor = (255, 255, 255)
 
@@ -20,9 +21,20 @@ class Stage():
         costume = pygame.image.load(costumePath)
         self.costumes[costumeName] = costume
 
+    def deleteCostumeByName(self, name):
+        self.costumes.pop(name, None)
+        setCostumeByName(self.costumeName) # Make sure we recalculate the costume number!
+
+    def deleteCostumeByNumber(self, number)
+        if number < len(self.costumes.keys()):
+            costumeName = self.costumes.keys()[number]
+            self.deleteCostumeByName(costumeName)
+            
+
     def setCostumeByName(self, name):
         if name in self.costumes:
             self.currentCostume = self.costumes[name]
+            self.costumeName = name
             self.costumeNumber = self.costumes.keys().index(name)
 
     def setCostumeByNumber(self, number):
