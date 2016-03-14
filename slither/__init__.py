@@ -60,9 +60,8 @@ class Stage():
 slitherStage = Stage()
 
 class Sprite(Stage):
-    def __init__(self, name="Default Name"):
+    def __init__(self):
         Stage.__init__(self)
-        self.name = name # Why is this here?
         self.xpos = 0
         self.ypos = 0
         self.direction = 0 # Default is 0, not 90 - it makes more sense
