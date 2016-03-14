@@ -6,10 +6,10 @@ sprites = [] # List of all sprites
     
 class Stage():
     def __init__(self):
-        self.costumes = {}
+        self.costumes = {"costume0" : "snakey.png"}
         self.costumeNumber = 0
-        self.costumeName = ""
-        self.currentCostume = False
+        self.costumeName = "costume0"
+        self.currentCostume = pygame.image.load("snakey.png")
         self.bgColor = (255, 255, 255)
 
     # Stage-specific functions
@@ -28,13 +28,12 @@ class Stage():
         self.costumes.pop(name, None)
         setCostumeByName(self.costumeName) # Make sure we recalculate the costume number!
 
-    def deleteCostumeByNumber(self, number)
+    def deleteCostumeByNumber(self, number):
         '''Delete a costume by number.'''
         if number < len(self.costumes.keys()):
             costumeName = self.costumes.keys()[number]
             self.deleteCostumeByName(costumeName)
             
-
     def setCostumeByName(self, name):
         '''Set a costume by its name.'''
         if name in self.costumes:
@@ -116,7 +115,7 @@ class Sprite(Stage):
 
 pygame.init()
 screen = pygame.display.set_mode((800, 600)) # Add customizable dimensions later on?
-caption = pygame.display.set_caption("Hiss Project") # Maybe a set caption to function?
+caption = pygame.display.set_caption("Slither Project") # Maybe a set caption to function?
 time.clock() # For future timer
 
 def blit():
