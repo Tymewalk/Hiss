@@ -42,6 +42,12 @@ class Stage():
             costumeName = self.costumes.keys()[number]
             self.setCostumeByName(costumeName)
 
+    def getCostumeNumber(self):
+        return self.costumeNumber
+
+    def getCostumeName(self):
+        return self.costumeName
+
 
 hissStage = Stage()
 
@@ -83,6 +89,9 @@ class Sprite(Stage):
 
     def setScaleTo(self, scale):
         self.scale = scale
+        
+    def getScale(self):
+        return self.scale
 
     def isVisible(self):
         '''Check if the object is visible, not just showing.'''
