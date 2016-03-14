@@ -25,6 +25,11 @@ class Stage():
             self.currentCostume = self.costumes[name]
             self.costumeNumber = self.costumes.keys().index(name)
 
+    def setCostumeByNumber(self, number):
+        if number < len(self.costumes.keys()):
+            costumeName = self.costumes.keys()[number]
+            self.setCostumeByName(costumeName)
+
 
 hissStage = Stage()
 

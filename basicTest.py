@@ -6,7 +6,7 @@ SOS.setCostumeByName("avatar")
 
 SoExcited = hiss.Sprite()
 SoExcited.addCostume("SoExcited.png", "avatar")
-SoExcited.setCostumeByName("avatar")
+SoExcited.setCostumeByNumber(0)
 
 SoExcited.goTo(300, 300)
 SoExcited.setScaleTo(0.33)
