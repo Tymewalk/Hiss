@@ -6,21 +6,47 @@ sprites = [] # List of sprites
     
 class Stage():
     def __init__(self):
-        self.costumes = []
+        self.costumes = {}
         self.costumeNumber = 0
+        self.costumeName = ""
         self.currentCostume = False
         self.bgColor = (255, 255, 255)
 
-    def addCostume(self, costumePath):
-        costume = pygame.image.load(costumePath)
-        self.costumes.append(costume)
-
+    # Stage-specific functions
     def setColor(self, r, g, b):
         self.bgColor = (r, g, b)
 
+    # Functions shared by sprites
+    def addCostume(self, costumePath, costumeName):
+        costume = pygame.image.load(costumePath)
+        self.costumes[costumeName] = costume
+
+    def deleteCostumeByName(self, name):
+        self.costumes.pop(name, None)
+        setCostumeByName(self.costumeName) # Make sure we recalculate the costume number!
+
+    def deleteCostumeByNumber(self, number)
+        if number < len(self.costumes.keys()):
+            costumeName = self.costumes.keys()[number]
+            self.deleteCostumeByName(costumeName)
+            
+
+    def setCostumeByName(self, name):
+        if name in self.costumes:
+            self.currentCostume = self.costumes[name]
+            self.costumeName = name
+            self.costumeNumber = self.costumes.keys().index(name)
+
     def setCostumeByNumber(self, number):
-        if number < len(self.costumes):
-            self.currentCostume = self.costumes[number]
+        if number < len(self.costumes.keys()):
+            costumeName = self.costumes.keys()[number]
+            self.setCostumeByName(costumeName)
+
+    def getCostumeNumber(self):
+        return self.costumeNumber
+
+    def getCostumeName(self):
+        return self.costumeName
 
 
 hissStage = Stage()
@@ -63,6 +89,9 @@ class Sprite(Stage):
 
     def setScaleTo(self, scale):
         self.scale = scale
+        
+    def getScale(self):
+        return self.scale
 
     def isVisible(self):
         '''Check if the object is visible, not just showing.'''
