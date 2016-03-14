@@ -57,7 +57,7 @@ class Stage():
         return self.costumeName
 
 
-hissStage = Stage()
+slitherStage = Stage()
 
 class Sprite(Stage):
     def __init__(self, name="Default Name"):
@@ -121,8 +121,8 @@ caption = pygame.display.set_caption("Hiss Project") # Maybe a set caption to fu
 time.clock() # For future timer
 
 def blit():
-    '''Draw objects to the screen. THIS MUST BE CALLED FOR HISS TO DISPAY OBJECTS.'''
-    screen.fill(hissStage.bgColor)
+    '''Draw objects to the screen. THIS MUST BE CALLED FOR SLITHER TO DISPAY OBJECTS.'''
+    screen.fill(slitherStage.bgColor)
     
     for obj in sprites:
         if obj.isVisible():
