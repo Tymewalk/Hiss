@@ -14,7 +14,7 @@ class Stage():
 
     # Stage-specific functions
     def setColor(self, r, g, b):
-        '''Set the color. Only for the stage'''
+        '''Set the stage's color. Only works on the stage, not sprites.'''
         self.bgColor = (r, g, b)
 
     # Functions shared by sprites
@@ -109,6 +109,12 @@ class Sprite(Stage):
         '''Get the sprite's current scale.'''
         return self.scale
 
+    def setDirection(self, direction):
+        self.direction = direction
+
+    def getDirection(self):
+        return self.direction
+        
     def isVisible(self):
         '''Check if the object is visible, not just showing.'''
         return self.showing and self.scale > 0
