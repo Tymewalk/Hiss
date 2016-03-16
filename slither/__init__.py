@@ -122,12 +122,15 @@ class Sprite(Stage):
         '''Check if the object is visible, not just showing.'''
         return self.showing and self.scale > 0
 
-pygame.init()
-screen = pygame.display.set_mode((800, 600)) # Add customizable dimensions later on?
-caption = pygame.display.set_caption("Slither Project") # Maybe a set caption to function?
-time.clock() # For future timer
 
-def blit():
+def setup():
+    pygame.init()
+    screen = pygame.display.set_mode((800, 600)) # Add customizable dimensions later on?
+    caption = pygame.display.set_caption("Slither Project") # Maybe a set caption to function?
+    time.clock() # For future timer
+    return screen
+
+def blit(screen):
     '''Draw objects to the screen. THIS MUST BE CALLED FOR SLITHER TO DISPAY OBJECTS.'''
     screen.fill(slitherStage.bgColor)
     
