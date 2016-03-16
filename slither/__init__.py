@@ -112,6 +112,9 @@ class Sprite(Stage):
     def setDirection(self, direction):
         self.direction = direction
 
+    def changeDirectionBy(self, amount):
+        self.direction += amount
+
     def getDirection(self):
         return self.direction
         
@@ -135,6 +138,8 @@ def blit():
             if not obj.scale == 1: # Don't do anything if it's a scale of 1
                 imageSize = image.get_size()
                 image = pygame.transform.scale(image, (int(imageSize[0] * obj.scale), int(imageSize[1] * obj.scale)))
+            if not obj.direction == 0:
+                image = pygame.transform.rotate(image, obj.direction)
             screen.blit(image, (obj.xpos, obj.ypos))
 
     pygame.display.flip()

@@ -16,6 +16,7 @@ continueLoop = True
 while continueLoop:
     slither.blit() # Display
     snakey.changeXBy(1)
+    SoExcited.changeDirectionBy(1)
     # Handle quitting
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
