@@ -1,3 +1,11 @@
+# SLITHER FOR PYTHON 2 AND 3
+# Hi there, code divers!
+# There's a lot of cool stuff here that has comments so you can understand what I'm doing.
+# You can even mess around with it yourself :)
+# If you think your messing around might help, go to:
+# https://github.com/Tymewalk/Slither
+# and make a pull request!
+
 import pygame, time, random
 # time is for the timer.
 # random is for random numbers.
@@ -59,6 +67,8 @@ class Stage():
 
 slitherStage = Stage()
 
+# The Sprite inherits things such as the costumes from the stage so everything can be kept in one place.
+# The code is also a lot smaller, which is a big plus.
 class Sprite(Stage):
     def __init__(self):
         Stage.__init__(self)
@@ -67,7 +77,7 @@ class Sprite(Stage):
         self.direction = 0 # Default is 0, not 90 - it makes more sense
         self.showing = True
         self.scale = 1 # How much to multiply it by in the scale
-        sprites.append(self)
+        sprites.append(self) # Add this sprite to the global list of sprites
         
     def show(self):
         '''Show the sprite.'''
