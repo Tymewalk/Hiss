@@ -6,10 +6,11 @@ sprites = [] # List of all sprites
     
 class Stage():
     def __init__(self):
-        self.costumes = {"costume0" : "snakey.png"}
+        self.snakey = pygame.image.load("snakey.png")
+        self.costumes = {"costume0" : self.snakey}
         self.costumeNumber = 0
         self.costumeName = "costume0"
-        self.currentCostume = pygame.image.load("snakey.png")
+        self.currentCostume = self.snakey
         self.bgColor = (255, 255, 255)
 
     # Stage-specific functions
