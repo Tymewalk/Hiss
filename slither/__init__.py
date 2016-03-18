@@ -122,8 +122,6 @@ class Sprite(Stage):
         '''Check if the object is visible, not just showing.'''
         return self.showing and self.scale > 0
 
-screen = False
-
 def setup():
     pygame.init()
     screen = pygame.display.set_mode((800, 600)) # Add customizable dimensions later on?
@@ -131,7 +129,7 @@ def setup():
     time.clock() # For future timer
     return screen
 
-def blit():
+def blit(screen):
     '''Draw objects to the screen. THIS MUST BE CALLED FOR SLITHER TO DISPAY OBJECTS.'''
     if screen:
         screen.fill(slitherStage.bgColor)
