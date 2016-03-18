@@ -122,6 +122,7 @@ class Sprite(Stage):
         '''Check if the object is visible, not just showing.'''
         return self.showing and self.scale > 0
 
+screen = False
 
 def setup():
     pygame.init()
@@ -130,19 +131,20 @@ def setup():
     time.clock() # For future timer
     return screen
 
-def blit(screen):
+def blit():
     '''Draw objects to the screen. THIS MUST BE CALLED FOR SLITHER TO DISPAY OBJECTS.'''
-    screen.fill(slitherStage.bgColor)
-    
-    for obj in sprites:
-        if obj.isVisible():
-            # Now that we know the object's showing, do calculations and stuff
-            image = obj.currentCostume # So we can modify it
-            if not obj.scale == 1: # Don't do anything if it's a scale of 1
-                imageSize = image.get_size()
-                image = pygame.transform.scale(image, (int(imageSize[0] * obj.scale), int(imageSize[1] * obj.scale)))
-            if not obj.direction == 0:
-                image = pygame.transform.rotate(image, obj.direction)
-            screen.blit(image, (obj.xpos, obj.ypos))
+    if screen:
+        screen.fill(slitherStage.bgColor)
+        
+        for obj in sprites:
+            if obj.isVisible():
+                # Now that we know the object's showing, do calculations and stuff
+                image = obj.currentCostume # So we can modify it
+                if not obj.scale == 1: # Don't do anything if it's a scale of 1
+                    imageSize = image.get_size()
+                    image = pygame.transform.scale(image, (int(imageSize[0] * obj.scale), int(imageSize[1] * obj.scale)))
+                if not obj.direction == 0:
+                    image = pygame.transform.rotate(image, obj.direction)
+                screen.blit(image, (obj.xpos, obj.ypos))
 
     pygame.display.flip()

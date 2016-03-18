@@ -17,7 +17,7 @@ screen = slither.setup() # Begin slither
 
 continueLoop = True
 while continueLoop:
-    slither.blit(screen) # Display
+    slither.blit() # Display
     snakey.changeXBy(1)
     SoExcited.changeDirectionBy(1)
     # Handle quitting
