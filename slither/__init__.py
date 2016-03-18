@@ -6,9 +6,8 @@
 # https://github.com/Tymewalk/Slither
 # and make a pull request!
 
-import pygame, time, random
-# time is for the timer.
-# random is for random numbers.
+import pygame
+# import time # For future timer
 
 sprites = [] # List of all sprites
     
@@ -138,7 +137,6 @@ def setup():
     pygame.init()
     screen = pygame.display.set_mode((800, 600)) # Add customizable dimensions later on?
     caption = pygame.display.set_caption("Slither Project") # Maybe a set caption to function?
-    time.clock() # For future timer
     return screen
 
 def blit(screen):
@@ -149,7 +147,7 @@ def blit(screen):
         for obj in sprites:
             if obj.isVisible():
                 # Now that we know the object's showing, do calculations and stuff
-                image = obj.currentCostume # So we can modify it
+                image = obj.currentCostume # So we can modify it and blit the modified version easily
                 if not obj.scale == 1: # Don't do anything if it's a scale of 1
                     imageSize = image.get_size()
                     image = pygame.transform.scale(image, (int(imageSize[0] * obj.scale), int(imageSize[1] * obj.scale)))
