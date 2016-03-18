@@ -4,7 +4,7 @@ import slither, pygame, time
 snakey = slither.Sprite()
 snakey.setCostumeByName("costume0")
 
-snakey.goTo(0, 250)
+snakey.goTo(0, 0)
 
 slither.slitherStage.setColor(40, 222, 40)
 
@@ -14,6 +14,7 @@ continueLoop = True
 while continueLoop:
     slither.blit(screen) # Display
     snakey.changeXBy(1)
+    snakey.changeYBy(1)
     snakey.changeDirectionBy(1)
     # Handle quitting
     for event in pygame.event.get():

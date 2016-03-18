@@ -10,6 +10,15 @@ import pygame
 # import time # For future timer
 
 sprites = [] # List of all sprites
+
+# Convienience functions
+# Taken from http://stackoverflow.com/questions/4183208/how-do-i-rotate-an-image-around-its-center-using-pygame
+def rotateCenter(image, angle):
+    """rotate a Surface, maintaining position."""
+    loc = image.get_rect().center  #rot_image is not defined 
+    rot_sprite = pygame.transform.rotate(image, angle)
+    rot_sprite.get_rect().center = loc
+    return rot_sprite
     
 class Stage():
     def __init__(self):
@@ -152,7 +161,7 @@ def blit(screen):
                     imageSize = image.get_size()
                     image = pygame.transform.scale(image, (int(imageSize[0] * obj.scale), int(imageSize[1] * obj.scale)))
                 if not obj.direction == 0:
-                    image = pygame.transform.rotate(image, obj.direction)
+                    image = rotateCenter(image, obj.direction)
                 screen.blit(image, (obj.xpos, obj.ypos))
 
     pygame.display.flip()
