@@ -124,6 +124,7 @@ class Sprite(Stage):
         return self.showing and self.scale > 0
 
 def setup():
+    '''Sets up PyGame and returns a screen object that can be used with blit().'''
     pygame.init()
     screen = pygame.display.set_mode((800, 600)) # Add customizable dimensions later on?
     caption = pygame.display.set_caption("Slither Project") # Maybe a set caption to function?
@@ -131,7 +132,7 @@ def setup():
     return screen
 
 def blit(screen):
-    '''Draw objects to the screen. THIS MUST BE CALLED FOR SLITHER TO DISPAY OBJECTS.'''
+    '''Takes a screen as an argument and draws objects to the screen. THIS MUST BE CALLED FOR SLITHER TO DISPAY OBJECTS.'''
     if screen:
         screen.fill(slitherStage.bgColor)
         
