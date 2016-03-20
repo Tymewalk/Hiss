@@ -140,11 +140,18 @@ class Sprite(Stage):
     def isVisible(self):
         '''Check if the object is visible, not just showing.'''
         return self.showing and self.scale > 0
-
+        
+    def isOffscreen(self):
+        if self.xpos > width or self.xpos < 0 or self.ypos > height or self.ypos < 0:
+            return True
+    
+width = 800
+height = 600
+    
 def setup():
     '''Sets up PyGame and returns a screen object that can be used with blit().'''
     pygame.init()
-    screen = pygame.display.set_mode((800, 600)) # Add customizable dimensions later on?
+    screen = pygame.display.set_mode((width, height)) # Add customizable dimensions later on?
     caption = pygame.display.set_caption("Slither Project") # Maybe a set caption to function?
     return screen
 
