@@ -151,6 +151,10 @@ class Sprite(Stage):
         '''Check if the object is visible, not just showing.'''
         return self.showing and self.scale > 0
 
+    def delete(self):
+        '''Remove the sprite from the global sprites list, causing it not to be drawn.'''
+        sprites.remove(self)
+
 def setup(caption=sys.argv[0]):
     '''Sets up PyGame and returns a screen object that can be used with blit().'''
     global globalscreen
