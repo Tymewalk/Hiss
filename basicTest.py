@@ -15,13 +15,8 @@ slither.slitherStage.setColor(40, 222, 40)
 
 screen = slither.setup() # Begin slither
 
-continueLoop = True
-while continueLoop:
-    slither.blit(screen) # Display
+def run_a_frame():
     snakey.changeXBy(1)
     SoExcited.changeDirectionBy(1)
-    # Handle quitting
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            continueLoop = False
-    time.sleep(0.01)    
+
+slither.runMainLoop(run_a_frame)
