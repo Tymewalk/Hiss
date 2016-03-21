@@ -12,7 +12,7 @@ slither.setup() # Begin slither
 def handlequit():
     print("Quiting...")
     return True
-slither.registerCallback(pygame.quit, handlequit) # This uses the direct call form
+slither.registerCallback(pygame.QUIT, handlequit) # This uses the direct call form
 
 @slither.registerCallback(pygame.MOUSEBUTTONUP) # This uses the decorator form
 def handlemouseup(event):
