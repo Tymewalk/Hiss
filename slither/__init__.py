@@ -212,4 +212,4 @@ def runMainLoop(frameFunc):
                 eventCallbacks[event.type](event)
                 # eventCallbacks would be a dictionary mapping
                 # event types to handler functions.
-        clock.tick(30) # Run at 30 FPS
+        clock.tick(60) # Run at 60 FPS
