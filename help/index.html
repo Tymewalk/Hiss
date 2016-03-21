@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <title>Help Page</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <header style="height: 65;background-color: rgb(48, 135, 51);">
+                <h2 style="font-family: 'Segoe UI', Arial, Sans-Serif;font-weight: 300;color: white;-webkit-margin-before: 0em;-webkit-margin-after:0em;padding: 15;text-align: center;border-color: darkgreen;border-style: solid">Slither Help</h2>
+        </header>
+        <div style="padding: 20;font-family: 'Segoe UI', Arial, Sans-Serif">
+            <p>Slither is a Python module designed for bridging the gap between Scratch and python. It adds Scratch-like features to Python using Pygame.</p>
+            <p>If you are new to Slither, make a Python script with this:</p>
+            <code>
+                <blockquote style="background-color: lightgrey;padding-top: 4px">
+                    <pre>
+                    import slither, pygame
+                
+                    slither.slitherStage.setColor(0, 255, 0)
+                    screen = slither.setup()
+                    loop = True
+                    
+                    while loop:
+                        slither.blit(screen)
+                        for event in pygame.event.get():
+                            if event.type == pygame.QUIT:
+                                loop = False
+                    </pre>
+                </blockquote>
+            </code>
+            <p>After you run this you'll get a green window.<b>So how does this work?</b> It uses a number of things that I'll explain step by step.</p>
+            <p><b>import slither, pygame</b> Allows Slither to be used in your code.</p>
+            <p><b>slither.slitherStage.setColor()</b> Changes the background color, you enter values in the form of number, number, number where number represents a RGB value.</p>
+            <p><b>screen = slither.setup()</b> Sets up the screen allowing you to draw cool stuff on it.</p>
+            <p><b>loop = True</b> This tells the while loop to run until you quit.</p>
+            <p><b>while loop:</b> This keeps your game running.</p>
+            <p><b>slither.blit(screen)</b> This important command splats all the graphic changes you've made (In this case, background color.) onto the screen, you need to put this in if you want to actually see stuff.</p>
+            <p><b>for event in pygame.event.get()</b> Makes pygame listen for events.</p>
+            <p><b>if event.type == pygame.QUIT:</b> Detects if you leave the game</p>
+            <p><b>loop = False</b> Stops updating the game so it just stops.</p>
+            
+            <pre> </pre>
+            <table style="font-family: serif; font-weight: 500; border-style: solid">
+                <tbody style="background-color: lightgrey"><tr><td><b>Stage Commands</b></td><td><b>Brief desription</b></td></tr></tbody>
+                <tr><td>__init__()</td><td>Initilizes the stage and sprite costumes.</td></tr>
+                <tr><td>setColor()</td><td>Sets the stage color (Stage Only).</td></tr>
+                <tr><td>addCostume()</td><td>Add a costume based on a given path and name.</td></tr>
+                <tr><td>deleteCostumeByName()</td><td>Delete a costume by name.</td></tr>
+                <tr><td>deleteCostumeByNumber()</td><td>Delete a costume by number.</td></tr>
+                <tr><td>setCostumeByName()</td><td>Set a costume by it's name.</td></tr>
+                <tr><td>setCostumeByNumber()</td><td>Set a costume by it's number.</td></tr>
+                <tr><td>getCostumeNumber()</td><td>Get the costume number of a sprite.</td></tr>
+                <tr><td>getCostumeName()</td><td>Get the costume name of a sprite.</td></tr>
+                <tbody style="background-color: lightgrey"><tr><td><b>Sprite Commands</b></td><td><b>Brief desription</b></td></tr></tbody>
+                <tr><td>__init__()</td><td>Initilizes a sprite.</td></tr>
+                <tr><td>show()</td><td>Show the sprite.</td></tr>
+                <tr><td>hide()</td><td>Hide the sprite.</td></tr>
+                <tr><td>changeXBy()</td><td>Change the sprites X Position by (amount).</td></tr>
+                <tr><td>changeYBy()</td><td>Change the sprites X Position by (amount).</td></tr>
+                <tr><td>goTo()</td><td>Goto a X and Y position.</td></tr>
+                <tr><td>setXTo()</td><td>Set the sprite's X position to (amount).</td></tr>
+                <tr><td>setYTo()</td><td>Set the sprite's Y position to (amount).</td></tr>
+                <tr><td>changeScaleBy()</td><td>Change the sprite's scale by (amount).</td></tr>
+                <tr><td>setScaleTo()</td><td>Set the sprite's scale to (amount).</td></tr>
+                <tr><td>getScale()</td><td>Get sprite's current scale.</td></tr>
+                <tr><td>setDirection()</td><td>Set the sprite's direction.</td></tr>
+                <tr><td>changeDirectionBy()</td><td>Change the sprite's direction by (amount).</td></tr>
+                <tr><td>getDirection()</td><td>Get the sprite's direction.</td></tr>
+                <tr><td>isVisible()</td><td>Check if the object is visible, not just showing.</td></tr>
+                <tr><td>isOffScreen()</td><td>Check if a sprite is off the screen.</td></tr>
+                <tbody style="background-color: lightgrey"><tr><td><b>Other Commands</b></td><td><b>Brief desription</b></td></tr></tbody>
+                <tr><td>setup()</td><td>Sets up slither.</td></tr>
+                <tr><td>blit()</td><td>Draw all graphic changes on the screen. This must be called to display graphics.</td></tr>
+            </table>
+        </div>
+    </body>
+</html>
