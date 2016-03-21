@@ -198,7 +198,7 @@ def registerCallback(eventname, func=None):
         def f(func):
             eventCallbacks[eventname] = func
         return f
-    
+
 def runQuitCallback():
     return eventCallbacks[pygame.QUIT]()
 
@@ -218,3 +218,4 @@ def runMainLoop(frameFunc):
                 # eventCallbacks would be a dictionary mapping
                 # event types to handler functions.
         clock.tick(projectFPS) # Run at however many FPS the user specifies
+
