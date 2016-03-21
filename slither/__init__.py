@@ -7,19 +7,29 @@
 # and make a pull request!
 
 import pygame
+import sys
 # import time # For future timer
 
 sprites = [] # List of all sprites
+clock = pygame.time.Clock() # Used to control framerate
+eventnames = ['QUIT', 'ACTIVEEVENT', 'KEYDOWN', 'KEYUP', 'MOUSEMOTION', 'MOUSEBUTTONUP', 'MOUSEBUTTONDOWN',
+              'JOYAXISMOTION', 'JOYBALLMOTION', 'JOYHATMOTION', 'JOYBUTTONUP', 'JOYBUTTONDOWN',
+              'VIDEORESIZE', 'VIDEOEXPOSE', 'USEREVENT']
+eventCallbacks = {
+                    getattr(pygame, name): lambda e=None: True
+                    for name in eventnames
+                } # Create a dict of callbacks that do nothing
+globalscreen = None
 
 # Convienience functions
 # Taken from http://stackoverflow.com/questions/4183208/how-do-i-rotate-an-image-around-its-center-using-pygame
 def rotateCenter(image, angle):
     """rotate a Surface, maintaining position."""
-    loc = image.get_rect().center  #rot_image is not defined 
+    loc = image.get_rect().center  #rot_image is not defined
     rot_sprite = pygame.transform.rotate(image, angle)
     rot_sprite.get_rect().center = loc
     return rot_sprite
-    
+
 class Stage():
     def __init__(self):
         self.snakey = pygame.image.load("snakey.png")
@@ -50,13 +60,13 @@ class Stage():
         if number < len(self.costumes.keys()):
             costumeName = self.costumes.keys()[number]
             self.deleteCostumeByName(costumeName)
-            
+
     def setCostumeByName(self, name):
         '''Set a costume by its name.'''
         if name in self.costumes:
             self.currentCostume = self.costumes[name]
             self.costumeName = name
-            self.costumeNumber = self.costumes.keys().index(name)
+            self.costumeNumber = list(self.costumes.keys()).index(name)
 
     def setCostumeByNumber(self, number):
         '''Set a costume by its number.'''
@@ -86,11 +96,11 @@ class Sprite(Stage):
         self.showing = True
         self.scale = 1 # How much to multiply it by in the scale
         sprites.append(self) # Add this sprite to the global list of sprites
-        
+
     def show(self):
         '''Show the sprite.'''
         self.showing = True
-        
+
     def hide(self):
         '''Hide the sprite.'''
         self.showing = False
@@ -123,7 +133,7 @@ class Sprite(Stage):
     def setScaleTo(self, scale):
         '''Set the sprite's scale to (amount).'''
         self.scale = scale
-        
+
     def getScale(self):
         '''Get the sprite's current scale.'''
         return self.scale
@@ -136,30 +146,25 @@ class Sprite(Stage):
 
     def getDirection(self):
         return self.direction
-        
+
     def isVisible(self):
         '''Check if the object is visible, not just showing.'''
         return self.showing and self.scale > 0
-        
-    def isOffscreen(self):
-        if self.xpos > width or self.xpos < 0 or self.ypos > height or self.ypos < 0:
-            return True
-    
-width = 800
-height = 600
-    
-def setup():
+
+def setup(caption=sys.argv[0]):
     '''Sets up PyGame and returns a screen object that can be used with blit().'''
+    global globalscreen
     pygame.init()
-    screen = pygame.display.set_mode((width, height)) # Add customizable dimensions later on?
-    caption = pygame.display.set_caption("Slither Project") # Maybe a set caption to function?
+    screen = pygame.display.set_mode((800, 600)) # Add customizable dimensions later on?
+    caption = pygame.display.set_caption(caption) # Maybe a set caption to function?
+    globalscreen = screen
     return screen
 
 def blit(screen):
     '''Takes a screen as an argument and draws objects to the screen. THIS MUST BE CALLED FOR SLITHER TO DISPAY OBJECTS.'''
     if screen:
         screen.fill(slitherStage.bgColor)
-        
+
         for obj in sprites:
             if obj.isVisible():
                 # Now that we know the object's showing, do calculations and stuff
@@ -172,3 +177,35 @@ def blit(screen):
                 screen.blit(image, (obj.xpos, obj.ypos))
 
     pygame.display.flip()
+
+def registerCallback(eventname, func=None):
+    "Register the function func to handle the event eventname"
+    if func:
+        # Direct call (registerCallback(pygame.QUIT, func))
+        eventCallbacks[eventname] = func
+    else:
+        # Decorator call (@registerCallback(pygame.QUIT)
+        #                 def f(): pass
+        def f(func):
+            eventCallbacks[eventname] = func
+        return f
+
+def runQuitCallback():
+    return eventCallbacks[pygame.QUIT]()
+
+def runMainLoop(frameFunc):
+    while True:
+        blit(globalscreen)
+        frameFunc()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                if runQuitCallback():
+                    # runQuitCallback would run the function
+                    # given to setQuitCallback, and return its result
+                    pygame.quit()
+                    sys.exit()
+            else:
+                eventCallbacks[event.type](event)
+                # eventCallbacks would be a dictionary mapping
+                # event types to handler functions.
+        clock.tick(30) # Run at 30 FPS

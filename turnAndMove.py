@@ -20,4 +20,4 @@ while continueLoop:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             continueLoop = False
-    time.sleep(0.01)    
+    time.sleep(0.01)
