@@ -40,7 +40,7 @@
             
             <pre> </pre>
             <table style="font-family: serif; font-weight: 500; border-style: solid">
-                <tbody style="background-color: lightgrey"><tr><td><b>Stage Commands</b></td><td><b>Brief desription</b></td></tr></tbody>
+                <tbody style="background-color: lightgrey"><tr><td><b>Stage Functions</b></td><td><b>Brief desription</b></td></tr></tbody>
                 <tr><td>__init__()</td><td>Initilizes the stage and sprite costumes.</td></tr>
                 <tr><td>setColor()</td><td>Sets the stage color (Stage Only).</td></tr>
                 <tr><td>addCostume()</td><td>Add a costume based on a given path and name.</td></tr>
@@ -50,7 +50,7 @@
                 <tr><td>setCostumeByNumber()</td><td>Set a costume by it's number.</td></tr>
                 <tr><td>getCostumeNumber()</td><td>Get the costume number of a sprite.</td></tr>
                 <tr><td>getCostumeName()</td><td>Get the costume name of a sprite.</td></tr>
-                <tbody style="background-color: lightgrey"><tr><td><b>Sprite Commands</b></td><td><b>Brief desription</b></td></tr></tbody>
+                <tbody style="background-color: lightgrey"><tr><td><b>Sprite Functions</b></td><td><b>Brief desription</b></td></tr></tbody>
                 <tr><td>__init__()</td><td>Initilizes a sprite.</td></tr>
                 <tr><td>show()</td><td>Show the sprite.</td></tr>
                 <tr><td>hide()</td><td>Hide the sprite.</td></tr>
@@ -66,10 +66,14 @@
                 <tr><td>changeDirectionBy()</td><td>Change the sprite's direction by (amount).</td></tr>
                 <tr><td>getDirection()</td><td>Get the sprite's direction.</td></tr>
                 <tr><td>isVisible()</td><td>Check if the object is visible, not just showing.</td></tr>
-                <tr><td>isOffScreen()</td><td>Check if a sprite is off the screen.</td></tr>
-                <tbody style="background-color: lightgrey"><tr><td><b>Other Commands</b></td><td><b>Brief desription</b></td></tr></tbody>
-                <tr><td>setup()</td><td>Sets up slither.</td></tr>
+                <tr><td>delete()</td><td>Remove the sprite from the global sprites list, causing it not to be drawn.</td></tr>
+                <tbody style="background-color: lightgrey"><tr><td><b>Other Functions</b></td><td><b>Brief desription</b></td></tr></tbody>
+                <tr><td>setup()</td><td>Sets up PyGame and returns a screen object that can be used with blit().</td></tr>
                 <tr><td>blit()</td><td>Draw all graphic changes on the screen. This must be called to display graphics.</td></tr>
+                <tr><td>setFPS()</td><td>Set the FPS of the project. Default is 60, and Scratch runs at 30.</td></tr>
+                <tr><td>registerCallback()</td><td>Register the function func to handle the event eventname</td></tr>
+                <tr><td>runQuitCallback()</td><td>Quit eventname handling.</td></tr>
+                <tr><td>runMainLoop()</td><td>Run the main game loop.</td></tr>
             </table>
         </div>
     </body>
