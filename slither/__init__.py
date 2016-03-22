@@ -167,6 +167,7 @@ def setup(caption=sys.argv[0]):
 projectFPS = 60 # 60 is the default
 def setFPS(fps):
     '''Set the FPS of the project. Default is 60, and Scratch runs at 30.'''
+    global projectFPS
     projectFPS = fps # projectFPS is the FPS that the main loop uses
 
 def blit(screen):
@@ -218,4 +219,3 @@ def runMainLoop(frameFunc):
                 # eventCallbacks would be a dictionary mapping
                 # event types to handler functions.
         clock.tick(projectFPS) # Run at however many FPS the user specifies
-
