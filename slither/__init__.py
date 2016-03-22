@@ -175,6 +175,9 @@ def blit(screen):
     if screen:
         screen.fill(slitherStage.bgColor)
 
+        if slitherStage.currentCostume:
+            screen.blit(slitherStage.currentCostume, (0, 0))
+
         for obj in sprites:
             if obj.isVisible():
                 # Now that we know the object's showing, do calculations and stuff
