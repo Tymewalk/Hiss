@@ -6,7 +6,7 @@ Slither is a Python module that uses PyGame to bring Scratch-like features to Py
 [Scratch](scratch.mit.edu) is a programming language developed by MIT that uses block-based scripts to introduce kids to programming.
 
 ## How do I run Slither?
-Simply clone the repo, move the `slither/` folder into the lib folder inside the folder you installed python, then simply type `import slither` in your script.
+Simply clone the repo, move the `slither/` folder into the lib folder inside python's folder, then add `import slither` in your script.
 You must have PyGame installed in order to use Slither.
 
 ## Why use Slither?
