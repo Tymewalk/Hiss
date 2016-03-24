@@ -36,7 +36,7 @@ class Stage():
         self.costumes = {"costume0" : self.snakey}
         self.costumeNumber = 0
         self.costumeName = "costume0"
-        self.currentCostume = self.snakey
+        self.currentCostume = None
         self.bgColor = (255, 255, 255)
 
     # Stage-specific functions
@@ -90,6 +90,7 @@ slitherStage = Stage()
 class Sprite(Stage):
     def __init__(self):
         Stage.__init__(self)
+        self.currentCostume = self.snakey
         self.xpos = 0
         self.ypos = 0
         self.direction = 0 # Default is 0, not 90 - it makes more sense
