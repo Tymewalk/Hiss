@@ -5,3 +5,4 @@ build/
 slither.egg-info/
 nppBackup
 Thumbs.db
+install.bat

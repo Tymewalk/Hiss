@@ -21,6 +21,8 @@ eventCallbacks = {
                 } # Create a dict of callbacks that do nothing
 globalscreen = None
 
+scriptdir = os.path.dirname(os.path.realpath(__import__("__main__").__file__))
+
 # Convienience functions
 # Taken from http://stackoverflow.com/questions/4183208/how-do-i-rotate-an-image-around-its-center-using-pygame
 def rotateCenter(image, angle):
@@ -47,7 +49,7 @@ class Stage():
     # Functions shared by sprites
     def addCostume(self, costumePath, costumeName):
         '''Add a costume based on a given path and name.'''
-        costume = pygame.image.load(costumePath)
+        costume = pygame.image.load(os.path.join(scriptdir, costumePath))
         self.costumes[costumeName] = costume
 
     def deleteCostumeByName(self, name):
@@ -71,7 +73,7 @@ class Stage():
     def setCostumeByNumber(self, number):
         '''Set a costume by its number.'''
         if number < len(self.costumes.keys()):
-            costumeName = self.costumes.keys()[number]
+            costumeName = list(self.costumes.keys())[number]
             self.setCostumeByName(costumeName)
 
     def getCostumeNumber(self):

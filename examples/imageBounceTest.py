@@ -1,6 +1,6 @@
-import slither, os
+import slither
 circle = slither.Sprite()
-circle.addCostume(os.path.join(os.path.dirname(__file__), "circle.png"), "circle")
+circle.addCostume("circle.png", "circle")
 circle.setCostumeByName("circle")
 circle.goTo(0,0)
 slither.slitherStage.setColor(255, 255, 255)

@@ -1,9 +1,9 @@
-import slither, pygame, time, os, math
+import slither, time, math
 snakey = slither.Sprite()
 snakey.setCostumeByName("costume0")
 snakey.setYTo(360)
 slither.slitherStage.setColor(40, 222, 40)
-slither.slitherStage.addCostume(os.path.join(os.path.dirname(__file__), "bg2.png"), "bg")
+slither.slitherStage.addCostume("bg2.png", "bg")
 slither.slitherStage.setCostumeByName("bg")
 
 slither.setup() # Begin slither'
