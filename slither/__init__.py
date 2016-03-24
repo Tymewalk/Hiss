@@ -7,7 +7,7 @@
 # and make a pull request!
 
 import pygame
-import sys
+import sys, os
 # import time # For future timer
 
 sprites = [] # List of all sprites
@@ -21,6 +21,8 @@ eventCallbacks = {
                 } # Create a dict of callbacks that do nothing
 globalscreen = None
 
+scriptdir = os.path.dirname(os.path.realpath(__import__("__main__").__file__))
+
 # Convienience functions
 # Taken from http://stackoverflow.com/questions/4183208/how-do-i-rotate-an-image-around-its-center-using-pygame
 def rotateCenter(image, angle):
@@ -32,11 +34,11 @@ def rotateCenter(image, angle):
 
 class Stage():
     def __init__(self):
-        self.snakey = pygame.image.load("snakey.png")
+        self.snakey = pygame.image.load(os.path.join(os.path.dirname(__file__), "snakey.png"))
         self.costumes = {"costume0" : self.snakey}
         self.costumeNumber = 0
         self.costumeName = "costume0"
-        self.currentCostume = self.snakey
+        self.currentCostume = None
         self.bgColor = (255, 255, 255)
 
     # Stage-specific functions
@@ -47,7 +49,7 @@ class Stage():
     # Functions shared by sprites
     def addCostume(self, costumePath, costumeName):
         '''Add a costume based on a given path and name.'''
-        costume = pygame.image.load(costumePath)
+        costume = pygame.image.load(os.path.join(scriptdir, costumePath))
         self.costumes[costumeName] = costume
 
     def deleteCostumeByName(self, name):
@@ -71,7 +73,7 @@ class Stage():
     def setCostumeByNumber(self, number):
         '''Set a costume by its number.'''
         if number < len(self.costumes.keys()):
-            costumeName = self.costumes.keys()[number]
+            costumeName = list(self.costumes.keys())[number]
             self.setCostumeByName(costumeName)
 
     def getCostumeNumber(self):
@@ -90,6 +92,7 @@ slitherStage = Stage()
 class Sprite(Stage):
     def __init__(self):
         Stage.__init__(self)
+        self.currentCostume = self.snakey
         self.xpos = 0
         self.ypos = 0
         self.direction = 0 # Default is 0, not 90 - it makes more sense
@@ -176,7 +179,7 @@ def blit(screen):
         screen.fill(slitherStage.bgColor)
 
         if slitherStage.currentCostume:
-            screen.blit(slitherStage.currentCostume, (0, 0))
+            screen.blit(pygame.transform.scale(slitherStage.currentCostume, (800,600)), (0, 0))
 
         for obj in sprites:
             if obj.isVisible():
