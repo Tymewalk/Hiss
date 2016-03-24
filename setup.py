@@ -21,7 +21,7 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.1.1',
+    version='0.1.2',
 
     description='A Python module that uses PyGame to bring Scratch-like features to Python',
     long_description='A Python module that uses PyGame to bring Scratch-like features to Python\nPyGame IS required for this module to work.',
@@ -65,7 +65,7 @@ setup(
 
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
-    packages=find_packages("slither"),
+    packages=["slither"],
 
     # Alternatively, if you want to distribute just a my_module.py, uncomment
     # this:
@@ -97,12 +97,4 @@ setup(
     # In this case, 'data_file' will be installed into '<sys.prefix>/my_data'
     data_files=[],
 
-    # To provide executable scripts, use entry points in preference to the
-    # "scripts" keyword. Entry points provide cross-platform support and allow
-    # pip to create the appropriate form of executable for the target platform.
-    #entry_points={
-    #    'console_scripts': [
-    #        'tymeventure=tymeventure:main',
-    #    ],
-    #},
 )
