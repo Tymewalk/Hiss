@@ -25,6 +25,7 @@ scriptdir = os.path.dirname(os.path.realpath(__import__("__main__").__file__))
 
 # Convienience functions
 # Taken from http://stackoverflow.com/questions/4183208/how-do-i-rotate-an-image-around-its-center-using-pygame
+# This function is broken, issue #9 remains
 def rotateCenter(image, angle):
     """rotate a Surface, maintaining position."""
     loc = image.get_rect().center  #rot_image is not defined
@@ -32,6 +33,7 @@ def rotateCenter(image, angle):
     rot_sprite.get_rect().center = loc
     return rot_sprite
 
+# Stage class
 class Stage():
     def __init__(self):
         self.snakey = pygame.image.load(os.path.join(os.path.dirname(__file__), "snakey.png"))
@@ -88,14 +90,13 @@ class Stage():
 slitherStage = Stage()
 
 # The Sprite inherits things such as the costumes from the stage so everything can be kept in one place.
-# The code is also a lot smaller, which is a big plus.
 class Sprite(Stage):
     def __init__(self):
-        Stage.__init__(self)
-        self.currentCostume = self.snakey
-        self.xpos = 0
-        self.ypos = 0
-        self.direction = 0 # Default is 0, not 90 - it makes more sense
+        Stage.__init__(self) # Get all the stuff from the stage, too
+        self.currentCostume = self.snakey # By default we should be set to Snakey
+        self.xpos = 0 # X Position
+        self.ypos = 0 # Y Position
+        self.direction = 0 # Direction is how much to change the direction, hence why it starts at 0 and not 90
         self.showing = True
         self.scale = 1 # How much to multiply it by in the scale
         sprites.append(self) # Add this sprite to the global list of sprites
@@ -162,8 +163,8 @@ def setup(caption=sys.argv[0]):
     '''Sets up PyGame and returns a screen object that can be used with blit().'''
     global globalscreen
     pygame.init()
-    screen = pygame.display.set_mode((800, 600)) # Add customizable dimensions later on?
-    caption = pygame.display.set_caption(caption) # Maybe a set caption to function?
+    screen = pygame.display.set_mode((800, 600))
+    caption = pygame.display.set_caption(caption)
     globalscreen = screen
     return screen
 
@@ -182,10 +183,10 @@ def blit(screen):
             screen.blit(pygame.transform.scale(slitherStage.currentCostume, (800,600)), (0, 0))
 
         for obj in sprites:
-            if obj.isVisible():
-                # Now that we know the object's showing, do calculations and stuff
+            if obj.isVisible(): # Check if the object is showing before we do anything
                 image = obj.currentCostume # So we can modify it and blit the modified version easily
-                if not obj.scale == 1: # Don't do anything if it's a scale of 1
+                # These next few blocks of code check if the object has the defaults before doing anything.
+                if not obj.scale == 1:
                     imageSize = image.get_size()
                     image = pygame.transform.scale(image, (int(imageSize[0] * obj.scale), int(imageSize[1] * obj.scale)))
                 if not obj.direction == 0:
