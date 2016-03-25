@@ -13,30 +13,25 @@
             <code>
                 <blockquote style="background-color: lightgrey;padding-top: 4px">
                     <pre>
-                    import slither, pygame
-                
-                    slither.slitherStage.setColor(0, 255, 0)
-                    screen = slither.setup()
-                    loop = True
+                    import slither
+                    slither.slitherStage.setColor(40, 222, 40)
                     
-                    while loop:
-                        slither.blit(screen)
-                        for event in pygame.event.get():
-                            if event.type == pygame.QUIT:
-                                loop = False
+                    slither.setup() # Begin slither
+
+                    def loop():
+                        pass
+
+                    slither.runMainLoop(loop)
                     </pre>
                 </blockquote>
             </code>
             <p>After you run this you'll get a green window.<b>So how does this work?</b> It uses a number of things that I'll explain step by step.</p>
-            <p><b>import slither, pygame</b> Allows Slither to be used in your code.</p>
+            <p><b>import slither</b> Allows Slither to be used in your code.</p>
             <p><b>slither.slitherStage.setColor()</b> Changes the background color, you enter values in the form of number, number, number where number represents a RGB value.</p>
-            <p><b>screen = slither.setup()</b> Sets up the screen allowing you to draw cool stuff on it.</p>
-            <p><b>loop = True</b> This tells the while loop to run until you quit.</p>
-            <p><b>while loop:</b> This keeps your game running.</p>
-            <p><b>slither.blit(screen)</b> This important command splats all the graphic changes you've made (In this case, background color.) onto the screen, you need to put this in if you want to actually see stuff.</p>
-            <p><b>for event in pygame.event.get()</b> Makes pygame listen for events.</p>
-            <p><b>if event.type == pygame.QUIT:</b> Detects if you leave the game</p>
-            <p><b>loop = False</b> Stops updating the game so it just stops.</p>
+            <p><b>slither.setup()</b> Sets up slither allowing you to do cool things.</p>
+            <p><b>def loop():</b> This function is usually called 60 times a second (depending on fps), your program's main loop should be in here.</p>
+            <p><b>pass</b> For this example there is no main loop, pass skips the main loop.</p>
+            <p><b>slither.runMainLoop(loop)</b> This important fuction runs your main loop, you need this for your code to run.</p>
             
             <pre> </pre>
             <table style="font-family: serif; font-weight: 500; border-style: solid">
