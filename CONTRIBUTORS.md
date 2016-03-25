@@ -2,10 +2,10 @@
 A list of all contributors who have helped or are helping.
 
 ## Tymewalk
-Started Slither.
+Started Slither, added several groundwork features.
 
 ## BookOwl
-Helped majorly rewrite Slither so it's easier to code in.
+Helped majorly rewrite Slither so it's easier to code in. Additionally helped suggest changes and fix bugs, which made Slither much better.
 
 ## Omegabyte
-Currently working on documentation for Slither, also helped make a couple of minor changes.
+Began and currently works on documentation, also added sound support.
