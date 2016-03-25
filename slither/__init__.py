@@ -152,9 +152,9 @@ class Sprite(Stage):
     def getDirection(self):
         return self.direction
     
-    def changeZIndexBy(self, zIndex):
+    def changeZIndexBy(self, amount):
         '''Change the sprite's z-index by (amount).'''
-        self.zIndex += zIndex
+        self.zIndex += amount
         reorderSprites()
 
     def setZIndexTo(self, zIndex):
