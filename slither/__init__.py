@@ -99,8 +99,9 @@ class Sprite(Stage):
         self.direction = 0 # Direction is how much to change the direction, hence why it starts at 0 and not 90
         self.showing = True
         self.scale = 1 # How much to multiply it by in the scale
+        self.zIndex = 0 # How high up are we in the "z" axis?
         sprites.append(self) # Add this sprite to the global list of sprites
-
+        
     def show(self):
         '''Show the sprite.'''
         self.showing = True
@@ -150,6 +151,20 @@ class Sprite(Stage):
 
     def getDirection(self):
         return self.direction
+    
+    def changeZIndexBy(self, zIndex):
+        '''Change the sprite's z-index by (amount).'''
+        self.zIndex += zIndex
+        reorderSprites()
+
+    def setZIndexTo(self, zIndex):
+        '''Set the sprite's z-index to (amount).'''
+        self.zIndex = zIndex
+        reorderSprites()
+
+    def getZIndex(self):
+        '''Get the sprite's current z-index.'''
+        return self.zIndex
 
     def isVisible(self):
         '''Check if the object is visible, not just showing.'''
@@ -191,6 +206,10 @@ def setFPS(fps):
     '''Set the FPS of the project. Default is 60, and Scratch runs at 30.'''
     global projectFPS
     projectFPS = fps # projectFPS is the FPS that the main loop uses
+
+def reorderSprites():
+    global sprites
+    sprites = sorted(sprites, key=(lambda s: s.zIndex))
 
 def blit(screen):
     '''Takes a screen as an argument and draws objects to the screen. THIS MUST BE CALLED FOR SLITHER TO DISPAY OBJECTS.'''
