@@ -170,9 +170,9 @@ class Sound():
         fullname = name
         try:
             sound = pygame.mixer.Sound(fullname)
-        except pygame.error:
+        except pygame.error as e:
             print ('Cannot load sound: %s' % fullname)
-            raise SystemExit(str(geterror()))
+            raise e
         return sound
 
 slitherSound = Sound()
