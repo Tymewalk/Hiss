@@ -159,6 +159,24 @@ class Sprite(Stage):
         '''Remove the sprite from the global sprites list, causing it not to be drawn.'''
         sprites.remove(self)
 
+class Sound():
+    # Based on pygame examples
+    def loadSound(self, name):
+        '''Load a sound. Set this function to a variable then call variable.play()'''
+        class NoneSound:
+            def play(self): pass
+        if not pygame.mixer or not pygame.mixer.get_init():
+            return NoneSound()
+        fullname = name
+        try:
+            sound = pygame.mixer.Sound(fullname)
+        except pygame.error:
+            print ('Cannot load sound: %s' % fullname)
+            raise SystemExit(str(geterror()))
+        return sound
+
+slitherSound = Sound()
+
 def setup(caption=sys.argv[0]):
     '''Sets up PyGame and returns a screen object that can be used with blit().'''
     global globalscreen
