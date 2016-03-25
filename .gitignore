@@ -4,3 +4,5 @@ dist/
 build/
 slither.egg-info/
 *.db
+nppBackup
+install.bat
