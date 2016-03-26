@@ -53,6 +53,8 @@ class Stage():
         '''Add a costume based on a given path and name.'''
         costume = pygame.image.load(os.path.join(scriptdir, costumePath))
         self.costumes[costumeName] = costume
+        if len(self.costumes.keys()) == 1: # Just added first costume to stage/sprite
+          self.setCostumeByName(costumeName) # ...So switch to it!
 
     def deleteCostumeByName(self, name):
         '''Delete a costume by name.'''
