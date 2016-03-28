@@ -112,7 +112,7 @@ class Sprite(Stage):
         '''Hide the sprite.'''
         self.showing = False
 
-    def goTo(self, xpos, ypos):
+    def goto(self, xpos, ypos):
         '''Go to xpos, ypos.'''
         self.xpos = xpos
         self.ypos = ypos
