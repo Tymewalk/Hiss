@@ -1,5 +1,4 @@
-# Slither
-A Python module for bridging Scratch and Python.
+!(https://cloud.githubusercontent.com/assets/13385064/14028163/82c374ea-f1d1-11e5-84b7-8ebc442b2d70.png)
 
 ## What is Slither?
 Slither is a Python module that uses PyGame to bring Scratch-like features to Python.
