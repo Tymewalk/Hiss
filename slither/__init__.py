@@ -112,61 +112,10 @@ class Sprite(Stage):
         '''Hide the sprite.'''
         self.showing = False
 
-    def changeXBy(self, amount):
-        '''Change the sprite's X Position by (amount).'''
-        self.xpos += amount
-
-    def changeYBy(self, amount):
-        '''Change the sprite's Y Position by (amount).'''
-        self.ypos += amount
-
     def goTo(self, xpos, ypos):
         '''Go to xpos, ypos.'''
         self.xpos = xpos
         self.ypos = ypos
-
-    def setXTo(self, xpos):
-        '''Set the sprite's X Position to (amount).'''
-        self.xpos = xpos
-
-    def setYTo(self, ypos):
-        '''Set the sprite's Y Position to (amount).'''
-        self.ypos = ypos
-
-    def changeScaleBy(self, amount):
-        '''Change the sprite's scale by (amount).'''
-        self.scale += amount
-
-    def setScaleTo(self, scale):
-        '''Set the sprite's scale to (amount).'''
-        self.scale = scale
-
-    def getScale(self):
-        '''Get the sprite's current scale.'''
-        return self.scale
-
-    def setDirection(self, direction):
-        self.direction = direction
-
-    def changeDirectionBy(self, amount):
-        self.direction += amount
-
-    def getDirection(self):
-        return self.direction
-    
-    def changeZIndexBy(self, amount):
-        '''Change the sprite's z-index by (amount).'''
-        self.zIndex += amount
-        reorderSprites()
-
-    def setZIndexTo(self, zIndex):
-        '''Set the sprite's z-index to (amount).'''
-        self.zIndex = zIndex
-        reorderSprites()
-
-    def getZIndex(self):
-        '''Get the sprite's current z-index.'''
-        return self.zIndex
 
     def isVisible(self):
         '''Check if the object is visible, not just showing.'''
