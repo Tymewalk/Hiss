@@ -8,18 +8,18 @@ SoExcited = slither.Sprite()
 SoExcited.addCostume("SoExcited.png", "avatar")
 SoExcited.setCostumeByNumber(0)
 
-SoExcited.changeZIndexBy(-1) # But when SoExcited's z-index is set to below that of Snakey's, SoExcited gets rendered before (and thus below) Snakey.
+SoExcited.zindex = -1 # But when SoExcited's z-index is set to below that of Snakey's, SoExcited gets rendered before (and thus below) Snakey.
 
-SoExcited.goTo(300, 300)
-SoExcited.setScaleTo(0.33)
+SoExcited.goto(300, 300)
+SoExcited.scale = 0.33
 
 slither.slitherStage.setColor(40, 40, 222)
 
 slither.setup()
 
 def run_a_frame():
-    snakey.changeXBy(1)
-    snakey.changeYBy(1)
-    SoExcited.changeDirectionBy(1)
+    snakey.xpos += 1
+    snakey.ypos += 1
+    SoExcited.direction += 1
 
 slither.runMainLoop(run_a_frame)
