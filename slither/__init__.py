@@ -75,7 +75,6 @@ class Stage():
             costumeName = list(self.costumes.keys())[number]
             self.setCostumeByName(costumeName)
 
-
 slitherStage = Stage()
 
 # The Sprite inherits things such as the costumes from the stage so everything can be kept in one place.
