@@ -43,11 +43,6 @@ class Stage():
         self.currentCostume = None
         self.bgColor = (255, 255, 255)
 
-    # Stage-specific functions
-    def setColor(self, r, g, b):
-        '''Set the stage's color. Only works on the stage, not sprites.'''
-        self.bgColor = (r, g, b)
-
     # Functions shared by sprites
     def addCostume(self, costumePath, costumeName):
         '''Add a costume based on a given path and name.'''
@@ -80,15 +75,6 @@ class Stage():
             costumeName = list(self.costumes.keys())[number]
             self.setCostumeByName(costumeName)
 
-    def getCostumeNumber(self):
-        '''Get the costume number of the sprite.'''
-        return self.costumeNumber
-
-    def getCostumeName(self):
-        '''Get the costume name of the sprite.'''
-        return self.costumeName
-
-
 slitherStage = Stage()
 
 # The Sprite inherits things such as the costumes from the stage so everything can be kept in one place.
@@ -101,9 +87,21 @@ class Sprite(Stage):
         self.direction = 0 # Direction is how much to change the direction, hence why it starts at 0 and not 90
         self.showing = True
         self.scale = 1 # How much to multiply it by in the scale
-        self.zIndex = 0 # How high up are we in the "z" axis?
+        self.zindex = 0 # How high up are we in the "z" axis?
         sprites.append(self) # Add this sprite to the global list of sprites
-        
+
+    @property
+    def zindex(self):
+        "The location of the sprite in the z-axis"
+        return self._zindex
+
+    @zindex.setter
+    def zindex(self, val):
+        #if val < 0 or int(val) != val:
+        #    raise ValueError("zindex must be a non-negative integer")
+        self._zindex = val
+        reorderSprites()
+
     def show(self):
         '''Show the sprite.'''
         self.showing = True
@@ -112,61 +110,10 @@ class Sprite(Stage):
         '''Hide the sprite.'''
         self.showing = False
 
-    def changeXBy(self, amount):
-        '''Change the sprite's X Position by (amount).'''
-        self.xpos += amount
-
-    def changeYBy(self, amount):
-        '''Change the sprite's Y Position by (amount).'''
-        self.ypos += amount
-
-    def goTo(self, xpos, ypos):
+    def goto(self, xpos, ypos):
         '''Go to xpos, ypos.'''
         self.xpos = xpos
         self.ypos = ypos
-
-    def setXTo(self, xpos):
-        '''Set the sprite's X Position to (amount).'''
-        self.xpos = xpos
-
-    def setYTo(self, ypos):
-        '''Set the sprite's Y Position to (amount).'''
-        self.ypos = ypos
-
-    def changeScaleBy(self, amount):
-        '''Change the sprite's scale by (amount).'''
-        self.scale += amount
-
-    def setScaleTo(self, scale):
-        '''Set the sprite's scale to (amount).'''
-        self.scale = scale
-
-    def getScale(self):
-        '''Get the sprite's current scale.'''
-        return self.scale
-
-    def setDirection(self, direction):
-        self.direction = direction
-
-    def changeDirectionBy(self, amount):
-        self.direction += amount
-
-    def getDirection(self):
-        return self.direction
-    
-    def changeZIndexBy(self, amount):
-        '''Change the sprite's z-index by (amount).'''
-        self.zIndex += amount
-        reorderSprites()
-
-    def setZIndexTo(self, zIndex):
-        '''Set the sprite's z-index to (amount).'''
-        self.zIndex = zIndex
-        reorderSprites()
-
-    def getZIndex(self):
-        '''Get the sprite's current z-index.'''
-        return self.zIndex
 
     def isVisible(self):
         '''Check if the object is visible, not just showing.'''
@@ -211,7 +158,7 @@ def setFPS(fps):
 
 def reorderSprites():
     global sprites
-    sprites = sorted(sprites, key=(lambda s: s.zIndex))
+    sprites = sorted(sprites, key=(lambda s: s.zindex))
 
 def blit(screen):
     '''Takes a screen as an argument and draws objects to the screen. THIS MUST BE CALLED FOR SLITHER TO DISPAY OBJECTS.'''
