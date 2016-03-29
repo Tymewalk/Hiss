@@ -43,11 +43,6 @@ class Stage():
         self.currentCostume = None
         self.bgColor = (255, 255, 255)
 
-    # Stage-specific functions
-    def setColor(self, r, g, b):
-        '''Set the stage's color. Only works on the stage, not sprites.'''
-        self.bgColor = (r, g, b)
-
     # Functions shared by sprites
     def addCostume(self, costumePath, costumeName):
         '''Add a costume based on a given path and name.'''
@@ -79,15 +74,6 @@ class Stage():
         if number < len(self.costumes.keys()):
             costumeName = list(self.costumes.keys())[number]
             self.setCostumeByName(costumeName)
-
-    def getCostumeNumber(self):
-        '''Get the costume number of the sprite.'''
-        return self.costumeNumber
-
-    def getCostumeName(self):
-        '''Get the costume name of the sprite.'''
-        return self.costumeName
-
 
 slitherStage = Stage()
 
