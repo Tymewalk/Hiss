@@ -43,7 +43,7 @@ class Stage():
         self.currentCostume = None
         self.bgColor = (255, 255, 255)
 
-    # Functions shared by sprites
+    # Costume adding and removing
     def addCostume(self, costumePath, costumeName):
         '''Add a costume based on a given path and name.'''
         costume = pygame.image.load(os.path.join(scriptdir, costumePath))
@@ -60,8 +60,16 @@ class Stage():
         '''Delete a costume by number.'''
         if number < len(self.costumes.keys()):
             costumeName = self.costumes.keys()[number]
-            self.deleteCostumeByName(costumeName)
+            self.deleteCostumeByName(costumeName) # TODO: Fix this stupid "get name from number" thing
+    @property
+    def costumeNumber(self):
+        '''The number of the costume the sprite is showing'''
+        return self._costumeNumber
 
+    @costumeNumber.setter
+    def costumeNumber(self, val):
+        self.setCostumeByNumber(val)
+    
     def setCostumeByName(self, name):
         '''Set a costume by its name.'''
         if name in self.costumes:
