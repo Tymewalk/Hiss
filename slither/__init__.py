@@ -1,6 +1,6 @@
 # SLITHER FOR PYTHON 2 AND 3
 # Hi there, code divers!
-# There's a lot of cool stuff here that has comments so you can understand what I'm doing.
+# There's a lot of cool stuff here that has comments so you can understand what this is doing.
 # You can even mess around with it yourself :)
 # If you think your messing around might help, go to:
 # https://github.com/Tymewalk/Slither
@@ -28,7 +28,7 @@ scriptdir = os.path.dirname(os.path.realpath(__import__("__main__").__file__))
 # This function is broken, issue #9 remains
 def rotateCenter(image, angle):
     """rotate a Surface, maintaining position."""
-    loc = image.get_rect().center  #rot_image is not defined
+    loc = image.get_rect().center  # rot_image is not defined
     rot_sprite = pygame.transform.rotate(image, angle)
     rot_sprite.get_rect().center = loc
     return rot_sprite
@@ -48,7 +48,7 @@ class Stage():
         '''Add a costume based on a given path and name.'''
         costume = pygame.image.load(os.path.join(scriptdir, costumePath))
         self.costumes[costumeName] = costume
-        if len(self.costumes.keys()) == 1: # Just added first costume to stage/sprite
+        if len(self.costumes.keys()) == 1: # Just added first costume to stage/sprite...
           self.setCostumeByName(costumeName) # ...So switch to it!
 
     def deleteCostumeByName(self, name):
@@ -73,7 +73,8 @@ class Stage():
         '''Set a costume by its number.'''
         if number < len(self.costumes.keys()):
             costumeName = list(self.costumes.keys())[number]
-            self.setCostumeByName(costumeName)
+            self.setCostumeByName(costumeName) # Wait, if we have the number, we use the (really not needed but convienient) name?
+            # WHY DID I DO THIS?!
 
 slitherStage = Stage()
 
