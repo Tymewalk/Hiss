@@ -87,9 +87,21 @@ class Sprite(Stage):
         self.direction = 0 # Direction is how much to change the direction, hence why it starts at 0 and not 90
         self.showing = True
         self.scale = 1 # How much to multiply it by in the scale
-        self.zIndex = 0 # How high up are we in the "z" axis?
+        self.zindex = 0 # How high up are we in the "z" axis?
         sprites.append(self) # Add this sprite to the global list of sprites
-        
+
+    @property
+    def zindex(self):
+        "The location of the sprite in the z-axis"
+        return self._zindex
+
+    @zindex.setter
+    def zindex(self, val):
+        #if val < 0 or int(val) != val:
+        #    raise ValueError("zindex must be a non-negative integer")
+        self._zindex = val
+        reorderSprites()
+
     def show(self):
         '''Show the sprite.'''
         self.showing = True
@@ -146,7 +158,7 @@ def setFPS(fps):
 
 def reorderSprites():
     global sprites
-    sprites = sorted(sprites, key=(lambda s: s.zIndex))
+    sprites = sorted(sprites, key=(lambda s: s.zindex))
 
 def blit(screen):
     '''Takes a screen as an argument and draws objects to the screen. THIS MUST BE CALLED FOR SLITHER TO DISPAY OBJECTS.'''
