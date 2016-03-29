@@ -61,6 +61,7 @@ class Stage():
         if number < len(self.costumes.keys()):
             costumeName = self.costumes.keys()[number]
             self.deleteCostumeByName(costumeName) # TODO: Fix this stupid "get name from number" thing
+            
     @property
     def costumeNumber(self):
         '''The number of the costume the sprite is showing'''
@@ -69,7 +70,17 @@ class Stage():
     @costumeNumber.setter
     def costumeNumber(self, val):
         self.setCostumeByNumber(val)
-    
+
+    @property
+    def costumeName(self):
+        '''The name of the costume the sprite is showing'''
+        return self._costumeName
+
+    @costumeName.setter
+    def costumeNumber(self, val):
+        self.setCostumeByName(val)
+
+    # TODO: Fix these
     def setCostumeByName(self, name):
         '''Set a costume by its name.'''
         if name in self.costumes:
