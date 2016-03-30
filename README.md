@@ -45,5 +45,20 @@ Finally, check to see if you have the newest version of Slither.
 
 If you've done all three of those things and it still doesn't work, file an issue.
 
-## Credits
-Scratch is property of The Lifelong Kindergarten Group. I am not affiliated with the LLK, nor do I own Scratch.
+# Contributors
+A list of all contributors who have helped or are helping.
+
+### @Tymewalk
+Started Slither, added several groundwork features.
+
+### @BookOwl
+Helped majorly rewrite Slither so it's easier to code in. Additionally helped suggest changes and fix bugs, which made Slither much better.
+
+### @Omegabyte
+Began and currently works on documentation, also added sound support.
+
+### @IronManMark20
+Is working on adding SVG support to slither.
+
+# Credits
+Scratch is property of The Lifelong Kindergarten Group. The slither devs are not affiliated with the LLK, nor do they own Scratch.
