@@ -1,5 +1,7 @@
 ![Slither's logo](https://cloud.githubusercontent.com/assets/13385064/14028163/82c374ea-f1d1-11e5-84b7-8ebc442b2d70.png)
 
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/6c21312189334c1782a49e152d0f4b78)](https://www.codacy.com/app/stanleybookowl/Slither)
+
 ## What is Slither?
 Slither is a Python module that uses PyGame to bring Scratch-like features to Python.
 [Scratch](scratch.mit.edu) is a programming language developed by MIT that uses block-based scripts to introduce kids to programming.
@@ -43,5 +45,20 @@ Finally, check to see if you have the newest version of Slither.
 
 If you've done all three of those things and it still doesn't work, file an issue.
 
-## Credits
-Scratch is property of The Lifelong Kindergarten Group. I am not affiliated with the LLK, nor do I own Scratch.
+# Contributors
+A list of all contributors who have helped or are helping.
+
+### @Tymewalk
+Started Slither, added several groundwork features.
+
+### @BookOwl
+Helped majorly rewrite Slither so it's easier to code in. Additionally helped suggest changes and fix bugs, which made Slither much better.
+
+### @Omegabyte
+Began and currently works on documentation, also added sound support.
+
+### @IronManMark20
+Is working on adding SVG support to slither.
+
+# Credits
+Scratch is property of The Lifelong Kindergarten Group. The slither devs are not affiliated with the LLK, nor do they own Scratch.
