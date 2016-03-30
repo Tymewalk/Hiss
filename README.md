@@ -1,5 +1,7 @@
 ![Slither's logo](https://cloud.githubusercontent.com/assets/13385064/14028163/82c374ea-f1d1-11e5-84b7-8ebc442b2d70.png)
 
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/6c21312189334c1782a49e152d0f4b78)](https://www.codacy.com/app/stanleybookowl/Slither)
+
 ## What is Slither?
 Slither is a Python module that uses PyGame to bring Scratch-like features to Python.
 [Scratch](scratch.mit.edu) is a programming language developed by MIT that uses block-based scripts to introduce kids to programming.
