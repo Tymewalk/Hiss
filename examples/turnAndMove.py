@@ -5,8 +5,6 @@ snakey.setCostumeByName("costume0")
 
 snakey.goto(0, 0)
 
-slither.slitherStage.setColor(40, 222, 40)
-
 slither.setup() # Begin slither
 
 def handlequit():
