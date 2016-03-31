@@ -8,7 +8,9 @@
 
 import pygame
 import sys, os
-# import time # For future timer
+
+WIDTH, HEIGHT = (800, 600)
+SCREEN_SIZE = (WIDTH, HEIGHT)
 
 sprites = [] # List of all sprites
 clock = pygame.time.Clock() # Used to control framerate
@@ -143,7 +145,7 @@ def setup(caption=sys.argv[0]):
     '''Sets up PyGame and returns a screen object that can be used with blit().'''
     global globalscreen
     pygame.init()
-    screen = pygame.display.set_mode((800, 600))
+    screen = pygame.display.set_mode(SCREEN_SIZE)
     caption = pygame.display.set_caption(caption)
     globalscreen = screen
     return screen
@@ -164,7 +166,7 @@ def blit(screen):
         screen.fill(slitherStage.bgColor)
 
         if slitherStage.currentCostume:
-            screen.blit(pygame.transform.scale(slitherStage.currentCostume, (800,600)), (0, 0))
+            screen.blit(pygame.transform.scale(slitherStage.currentCostume, SCREEN_SIZE, (0, 0)))
 
         for obj in sprites:
             if obj.isVisible(): # Check if the object is showing before we do anything
