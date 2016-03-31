@@ -28,9 +28,7 @@ scriptdir = os.path.dirname(os.path.realpath(__import__("__main__").__file__))
 # This function is broken, issue #9 remains
 def rotateCenter(image, angle):
     """rotate a Surface, maintaining position."""
-    loc = image.get_rect().center  #rot_image is not defined
     rot_sprite = pygame.transform.rotate(image, angle)
-    rot_sprite.get_rect().center = loc
     return rot_sprite
 
 # Stage class
@@ -171,13 +169,16 @@ def blit(screen):
         for obj in sprites:
             if obj.isVisible(): # Check if the object is showing before we do anything
                 image = obj.currentCostume # So we can modify it and blit the modified version easily
+                orig_rect = image.get_rect()
                 # These next few blocks of code check if the object has the defaults before doing anything.
                 if not obj.scale == 1:
                     imageSize = image.get_size()
                     image = pygame.transform.scale(image, (int(imageSize[0] * obj.scale), int(imageSize[1] * obj.scale)))
                 if not obj.direction == 0:
                     image = rotateCenter(image, obj.direction)
-                screen.blit(image, (obj.xpos, obj.ypos))
+                new_rect = image.get_rect()
+                new_rect.center = (obj.xpos, obj.ypos)
+                screen.blit(image, new_rect)
 
     pygame.display.flip()
 
