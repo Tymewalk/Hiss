@@ -169,7 +169,6 @@ def blit(screen):
         for obj in sprites:
             if obj.isVisible(): # Check if the object is showing before we do anything
                 image = obj.currentCostume # So we can modify it and blit the modified version easily
-                orig_rect = image.get_rect()
                 # These next few blocks of code check if the object has the defaults before doing anything.
                 if not obj.scale == 1:
                     imageSize = image.get_size()
