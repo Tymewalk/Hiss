@@ -7,6 +7,7 @@ from setuptools import setup, find_packages
 # To use a consistent encoding
 from codecs import open
 from os import path
+import glob
 
 here = path.abspath(path.dirname(__file__))
 
@@ -20,7 +21,7 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.2.0',
+    version='0.2.1',
 
     description='A Python module that uses PyGame to bring Scratch-like features to Python',
     long_description='A Python module that uses PyGame to bring Scratch-like features to Python\nPyGame IS required for this module to work.',
@@ -64,7 +65,7 @@ setup(
 
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
-    packages=["slither"],
+    packages=["slither", "slither.examples"],
 
     # Alternatively, if you want to distribute just a my_module.py, uncomment
     # this:
@@ -87,7 +88,8 @@ setup(
     # installed, specify them here.  If using Python 2.6 or less, then these
     # have to be included in MANIFEST.in as well.
     package_data={
-      'slither': ['snakey.png']
+      'slither': ['snakey.png'],
+      'slither.examples': list(map(path.basename, glob.glob("slither/examples/*.png") + glob.glob("slither/examples/*.wav")))
     },
 
     # Although 'package_data' is the preferred approach, in some case you may

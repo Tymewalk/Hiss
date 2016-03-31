@@ -1,12 +1,11 @@
-import slither, time, math
+import slither, math
 
 snakey = slither.Sprite()
-snakey.setCostumeByName("costume0")
-snakey.ypos = 360
+snakey.ypos = 460
 
-slither.slitherStage.setColor(40, 222, 40)
+slither.slitherStage.bgColor = (40, 222, 40)
 slither.slitherStage.addCostume("bg2.png", "bg")
-slither.slitherStage.setCostumeByName("bg")
+slither.slitherStage.costumeName = "bg"
 
 slither.setup() # Begin slither'
 
