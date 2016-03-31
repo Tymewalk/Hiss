@@ -143,27 +143,27 @@ class Sprite(Stage):
         sprites.remove(self)
 
 # DOES NOT WORK!
-# class Sound():
-#     # Based on pygame examples
-#     def loadSound(self, name):
-#         '''Load a sound. Set this function to a variable then call variable.play()'''
-#         try:
-#             pygame.mixer.get_init()
-#         except:
-#             pass
-#         class NoneSound:
-#             def play(self): pass
-#         if not pygame.mixer:
-#             return NoneSound()
-#         fullname = os.path.join(scriptdir, name)
-#         try:
-#             sound = pygame.mixer.Sound(fullname)
-#         except pygame.error as e:
-#             print ('Cannot load sound: %s' % fullname)
-#             raise e
-#         return sound
-#
-# slitherSound = Sound()
+ class Sound():
+     # Based on pygame examples
+     def loadSound(self, name):
+         '''Load a sound. Set this function to a variable then call variable.play()'''
+         try:
+             pygame.mixer.get_init()
+         except:
+             pass
+         class NoneSound:
+             def play(self): pass
+         if not pygame.mixer:
+             return NoneSound()
+         fullname = os.path.join(scriptdir, name)
+         try:
+             sound = pygame.mixer.Sound(fullname)
+         except pygame.error as e:
+             print ('Cannot load sound: %s' % fullname)
+             raise e
+         return sound
+
+ slitherSound = Sound()
 
 def setup(caption=sys.argv[0]):
     '''Sets up PyGame and returns a screen object that can be used with blit().'''
