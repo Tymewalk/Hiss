@@ -1,10 +1,13 @@
 # SLITHER FOR PYTHON 2 AND 3
 # Hi there, code divers!
-# There's a lot of cool stuff here that has comments so you can understand what I'm doing.
+# There's a lot of cool stuff here that has comments so you can understand what's going on.
 # You can even mess around with it yourself :)
 # If you think your messing around might help, go to:
-# https://github.com/Tymewalk/Slither
+# https://github.com/PySlither/Slither
 # and make a pull request!
+
+# Contributors: If your code doesn't seem straightforward, make comments so other people know what's going on
+# Also make sure to credit sources like StackOverflow.
 
 import pygame
 import sys, os
@@ -27,7 +30,6 @@ scriptdir = os.path.dirname(os.path.realpath(__import__("__main__").__file__))
 
 # Convienience functions
 # Taken from http://stackoverflow.com/questions/4183208/how-do-i-rotate-an-image-around-its-center-using-pygame
-# This function is broken, issue #9 remains
 def rotateCenter(image, angle):
     """rotate a Surface, maintaining position."""
     rot_sprite = pygame.transform.rotate(image, angle)
@@ -54,26 +56,40 @@ class Stage():
     def deleteCostumeByName(self, name):
         '''Delete a costume by name.'''
         self.costumes.pop(name, None)
-        setCostumeByName(self.costumeName) # Make sure we recalculate the costume number!
+        self.recalculateNumberFromName(self.costumeName) # Make sure we recalculate the costume data!
 
     def deleteCostumeByNumber(self, number):
         '''Delete a costume by number.'''
         if number < len(self.costumes.keys()):
             costumeName = self.costumes.keys()[number]
-            self.deleteCostumeByName(costumeName)
+            self.deleteCostumeByName(costumeName) # TODO: Fix this stupid "get name from number" thing
+            
+    @property
+    def costumeNumber(self):
+        '''The number of the costume the sprite is showing'''
+        return self._costumeNumber
 
-    def setCostumeByName(self, name):
-        '''Set a costume by its name.'''
-        if name in self.costumes:
-            self.currentCostume = self.costumes[name]
+    @costumeNumber.setter
+    def costumeNumber(self, val):
+        if number < len(self.costumes.keys()): # TODO: use mod to wrap around
+            self.costumeName = list(self.costumes.keys())[val]
+            self.costumeNumber = val
+
+    @property
+    def costumeName(self):
+        '''The name of the costume the sprite is showing'''
+        return self._costumeName
+    
+    @costumeName.setter
+    def costumeName(self, val):
+        if val in self.costumes:
+            self.recalculateCostumeDataFromName(val)
+
+    def recalculateCostumeDataFromName(self, name):
             self.costumeName = name
             self.costumeNumber = list(self.costumes.keys()).index(name)
+            self.currentCostume = self.costumes[self.costumeNumber]
 
-    def setCostumeByNumber(self, number):
-        '''Set a costume by its number.'''
-        if number < len(self.costumes.keys()):
-            costumeName = list(self.costumes.keys())[number]
-            self.setCostumeByName(costumeName)
 
 slitherStage = Stage()
 
