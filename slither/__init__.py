@@ -54,7 +54,7 @@ class Stage():
     def deleteCostumeByName(self, name):
         '''Delete a costume by name.'''
         self.costumes.pop(name, None)
-        setCostumeByName(self.costumeName) # Make sure we recalculate the costume number!
+        self.recalculateNumberFromName(self.costumeName) # Make sure we recalculate the costume data!
 
     def deleteCostumeByNumber(self, number):
         '''Delete a costume by number.'''
@@ -81,9 +81,13 @@ class Stage():
     @costumeName.setter
     def costumeName(self, val):
         if val in self.costumes:
-            self.currentCostume = self.costumes[val]
-            self.costumeName = val
-            self.costumeNumber = list(self.costumes.keys()).index(val)
+            self.recalculateCostumeDataFromName(val)
+
+    def recalculateCostumeDataFromName(self, name):
+            self.costumeName = name
+            self.costumeNumber = list(self.costumes.keys()).index(name)
+            self.currentCostume = self.costumes[self.costumeNumber]
+        
         
 
 slitherStage = Stage()
