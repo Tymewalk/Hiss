@@ -10,7 +10,7 @@
 # Also make sure to credit sources like StackOverflow.
 
 import pygame
-import sys, os
+import sys, os, collections, warnings
 
 WIDTH, HEIGHT = (800, 600)
 SCREEN_SIZE = (WIDTH, HEIGHT)
@@ -26,7 +26,11 @@ eventCallbacks = {
                 } # Create a dict of callbacks that do nothing
 globalscreen = None
 
-scriptdir = os.path.dirname(os.path.realpath(__import__("__main__").__file__))
+try:
+    scriptdir = os.path.dirname(os.path.realpath(__import__("__main__").__file__))
+except AttributeError:
+    warnings.warn("Couldn't find scripts dir, some functions may not work.")
+    scriptdir = os.path.realpath(".")
 
 # Convienience functions
 # Taken from http://stackoverflow.com/questions/4183208/how-do-i-rotate-an-image-around-its-center-using-pygame
@@ -39,7 +43,7 @@ def rotateCenter(image, angle):
 class Stage():
     def __init__(self):
         self.snakey = pygame.image.load(os.path.join(os.path.dirname(__file__), "snakey.png"))
-        self.costumes = {"costume0" : self.snakey}
+        self.costumes = collections.OrderedDict({"costume0" : self.snakey})
         self.costumeNumber = 0
         self.costumeName = "costume0"
         self.currentCostume = None
@@ -63,7 +67,7 @@ class Stage():
         if number < len(self.costumes.keys()):
             costumeName = self.costumes.keys()[number]
             self.deleteCostumeByName(costumeName) # TODO: Fix this stupid "get name from number" thing
-            
+
     @property
     def costumeNumber(self):
         '''The number of the costume the sprite is showing'''
@@ -71,24 +75,23 @@ class Stage():
 
     @costumeNumber.setter
     def costumeNumber(self, val):
-        if number < len(self.costumes.keys()): # TODO: use mod to wrap around
+        if val < len(self.costumes.keys()): # TODO: use mod to wrap around
             self.costumeName = list(self.costumes.keys())[val]
-            self.costumeNumber = val
+            self._costumeNumber = val
 
     @property
     def costumeName(self):
         '''The name of the costume the sprite is showing'''
         return self._costumeName
-    
+
     @costumeName.setter
     def costumeName(self, val):
         if val in self.costumes:
             self.recalculateCostumeDataFromName(val)
 
     def recalculateCostumeDataFromName(self, name):
-            self.costumeName = name
-            self.costumeNumber = list(self.costumes.keys()).index(name)
-            self.currentCostume = self.costumes[self.costumeNumber]
+            self._costumeName = name
+            self.currentCostume = self.costumes[self.costumeName]
 
 
 slitherStage = Stage()
@@ -139,23 +142,28 @@ class Sprite(Stage):
         '''Remove the sprite from the global sprites list, causing it not to be drawn.'''
         sprites.remove(self)
 
-class Sound():
-    # Based on pygame examples
-    def loadSound(self, name):
-        '''Load a sound. Set this function to a variable then call variable.play()'''
-        class NoneSound:
-            def play(self): pass
-        if not pygame.mixer or not pygame.mixer.get_init():
-            return NoneSound()
-        fullname = name
-        try:
-            sound = pygame.mixer.Sound(fullname)
-        except pygame.error as e:
-            print ('Cannot load sound: %s' % fullname)
-            raise e
-        return sound
-
-slitherSound = Sound()
+# DOES NOT WORK!
+# class Sound():
+#     # Based on pygame examples
+#     def loadSound(self, name):
+#         '''Load a sound. Set this function to a variable then call variable.play()'''
+#         try:
+#             pygame.mixer.get_init()
+#         except:
+#             pass
+#         class NoneSound:
+#             def play(self): pass
+#         if not pygame.mixer:
+#             return NoneSound()
+#         fullname = os.path.join(scriptdir, name)
+#         try:
+#             sound = pygame.mixer.Sound(fullname)
+#         except pygame.error as e:
+#             print ('Cannot load sound: %s' % fullname)
+#             raise e
+#         return sound
+#
+# slitherSound = Sound()
 
 def setup(caption=sys.argv[0]):
     '''Sets up PyGame and returns a screen object that can be used with blit().'''
@@ -182,7 +190,7 @@ def blit(screen):
         screen.fill(slitherStage.bgColor)
 
         if slitherStage.currentCostume:
-            screen.blit(pygame.transform.scale(slitherStage.currentCostume, SCREEN_SIZE, (0, 0)))
+            screen.blit(pygame.transform.scale(slitherStage.currentCostume, SCREEN_SIZE), (0, 0))
 
         for obj in sprites:
             if obj.isVisible(): # Check if the object is showing before we do anything

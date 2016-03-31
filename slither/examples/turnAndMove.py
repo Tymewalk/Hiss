@@ -1,7 +1,7 @@
 import slither, pygame
 
 snakey = slither.Sprite()
-snakey.setCostumeByName("costume0")
+snakey.costumeName = "costume0"
 
 snakey.goto(0, 0)
 

@@ -3,13 +3,12 @@ import slither
 def create_circle():
     circle = slither.Sprite()
     circle.addCostume("circle.png", "circle")
-    circle.setCostumeByName("circle")
+    circle.costumeName = "circle"
     circle.goto(0,0)
     return circle
 circle1, circle2, circle3 = create_circle(), create_circle(), create_circle()
 circle4 = create_circle()
 circle4.goto(400,300)
-circle4.debug = True
 slither.slitherStage.bgcolor = (255, 255, 255)
 
 def run_a_frame():
