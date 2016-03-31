@@ -3,9 +3,9 @@ https://github.com/PySlither/Slither
 """
 
 # Always prefer setuptools over distutils
-from setuptools import setup, find_packages
+from setuptools import setup#, find_packages
 # To use a consistent encoding
-from codecs import open
+#from codecs import open
 from os import path
 
 here = path.abspath(path.dirname(__file__))
