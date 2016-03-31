@@ -69,31 +69,22 @@ class Stage():
 
     @costumeNumber.setter
     def costumeNumber(self, val):
-        self.setCostumeByNumber(val)
+        if number < len(self.costumes.keys()): # TODO: use mod to wrap around
+            self.costumeName = list(self.costumes.keys())[val]
+            self.costumeNumber = val
 
     @property
     def costumeName(self):
         '''The name of the costume the sprite is showing'''
         return self._costumeName
-
+    
     @costumeName.setter
-    def costumeNumber(self, val):
-        self.setCostumeByName(val)
- 
-    # TODO: Fix these
-
-    def setCostumeByName(self, name):
-        '''Set a costume by its name.'''
-        if name in self.costumes:
-            self.currentCostume = self.costumes[name]
-            self.costumeName = name
-            self.costumeNumber = list(self.costumes.keys()).index(name)
-
-    def setCostumeByNumber(self, number):
-        '''Set a costume by its number.'''
-        if number < len(self.costumes.keys()):
-            costumeName = list(self.costumes.keys())[number]
-            self.setCostumeByName(costumeName)
+    def costumeName(self, val):
+        if val in self.costumes:
+            self.currentCostume = self.costumes[val]
+            self.costumeName = val
+            self.costumeNumber = list(self.costumes.keys()).index(val)
+        
 
 slitherStage = Stage()
 
