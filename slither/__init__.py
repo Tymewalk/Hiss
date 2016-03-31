@@ -8,7 +8,9 @@
 
 import pygame
 import sys, os
-# import time # For future timer
+
+WIDTH, HEIGHT = (800, 600)
+SCREEN_SIZE = (WIDTH, HEIGHT)
 
 sprites = [] # List of all sprites
 clock = pygame.time.Clock() # Used to control framerate
@@ -28,9 +30,7 @@ scriptdir = os.path.dirname(os.path.realpath(__import__("__main__").__file__))
 # This function is broken, issue #9 remains
 def rotateCenter(image, angle):
     """rotate a Surface, maintaining position."""
-    loc = image.get_rect().center  #rot_image is not defined
     rot_sprite = pygame.transform.rotate(image, angle)
-    rot_sprite.get_rect().center = loc
     return rot_sprite
 
 # Stage class
@@ -145,7 +145,7 @@ def setup(caption=sys.argv[0]):
     '''Sets up PyGame and returns a screen object that can be used with blit().'''
     global globalscreen
     pygame.init()
-    screen = pygame.display.set_mode((800, 600))
+    screen = pygame.display.set_mode(SCREEN_SIZE)
     caption = pygame.display.set_caption(caption)
     globalscreen = screen
     return screen
@@ -166,7 +166,7 @@ def blit(screen):
         screen.fill(slitherStage.bgColor)
 
         if slitherStage.currentCostume:
-            screen.blit(pygame.transform.scale(slitherStage.currentCostume, (800,600)), (0, 0))
+            screen.blit(pygame.transform.scale(slitherStage.currentCostume, SCREEN_SIZE, (0, 0)))
 
         for obj in sprites:
             if obj.isVisible(): # Check if the object is showing before we do anything
@@ -177,7 +177,9 @@ def blit(screen):
                     image = pygame.transform.scale(image, (int(imageSize[0] * obj.scale), int(imageSize[1] * obj.scale)))
                 if not obj.direction == 0:
                     image = rotateCenter(image, obj.direction)
-                screen.blit(image, (obj.xpos, obj.ypos))
+                new_rect = image.get_rect()
+                new_rect.center = (obj.xpos, obj.ypos)
+                screen.blit(image, new_rect)
 
     pygame.display.flip()
 
