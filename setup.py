@@ -1,5 +1,5 @@
 """A Python module that uses PyGame to bring Scratch-like features to Python.
-https://github.com/Tymewalk/Slither
+https://github.com/PySlither/Slither
 """
 
 # Always prefer setuptools over distutils
@@ -26,7 +26,7 @@ setup(
     long_description='A Python module that uses PyGame to bring Scratch-like features to Python\nPyGame IS required for this module to work.',
 
     # The project's main homepage.
-    url='https://github.com/Tymewalk/Slither',
+    url='https://github.com/PySlither/Slither',
 
     # Author details
     author='Tymewalk',
