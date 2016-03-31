@@ -2,7 +2,7 @@ import slither
 
 def create_circle():
     circle = slither.Sprite()
-    circle.addCostume("circle.png", "circle")
+    circle.addCostume("assets/circle.png", "circle")
     circle.costumeName = "circle"
     circle.goto(0,0)
     return circle

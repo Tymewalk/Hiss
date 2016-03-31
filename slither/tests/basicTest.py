@@ -5,7 +5,7 @@ snakey.costumeName = "costume0" # You can set the default costume (costume0) by 
 snakey.ypos = 100
 
 SoExcited = slither.Sprite()
-SoExcited.addCostume("SoExcited.png", "avatar")
+SoExcited.addCostume("assets/SoExcited.png", "avatar")
 SoExcited.costumeNumber = 1 # ...or you can use a number.
 
 SoExcited.goto(300, 300)

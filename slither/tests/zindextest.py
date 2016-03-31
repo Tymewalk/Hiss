@@ -4,7 +4,7 @@ import slither
 snakey = slither.Sprite()
 
 SoExcited = slither.Sprite()
-SoExcited.addCostume("SoExcited.png", "avatar")
+SoExcited.addCostume("assets/SoExcited.png", "avatar")
 SoExcited.costumeNumber = 1
 
 SoExcited.zindex = -1 # But when SoExcited's z-index is set to below that of Snakey's, SoExcited gets rendered before (and thus below) Snakey.
