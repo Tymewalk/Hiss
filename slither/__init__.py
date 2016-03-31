@@ -1,10 +1,13 @@
 # SLITHER FOR PYTHON 2 AND 3
 # Hi there, code divers!
-# There's a lot of cool stuff here that has comments so you can understand what I'm doing.
+# There's a lot of cool stuff here that has comments so you can understand what's going on.
 # You can even mess around with it yourself :)
 # If you think your messing around might help, go to:
-# https://github.com/Tymewalk/Slither
+# https://github.com/PySlither/Slither
 # and make a pull request!
+
+# Contributors: If your code doesn't seem straightforward, make comments so other people know what's going on
+# Also make sure to credit sources like StackOverflow.
 
 import pygame
 import sys, os
@@ -27,7 +30,6 @@ scriptdir = os.path.dirname(os.path.realpath(__import__("__main__").__file__))
 
 # Convienience functions
 # Taken from http://stackoverflow.com/questions/4183208/how-do-i-rotate-an-image-around-its-center-using-pygame
-# This function is broken, issue #9 remains
 def rotateCenter(image, angle):
     """rotate a Surface, maintaining position."""
     rot_sprite = pygame.transform.rotate(image, angle)
@@ -87,8 +89,7 @@ class Stage():
             self.costumeName = name
             self.costumeNumber = list(self.costumes.keys()).index(name)
             self.currentCostume = self.costumes[self.costumeNumber]
-        
-        
+
 
 slitherStage = Stage()
 
