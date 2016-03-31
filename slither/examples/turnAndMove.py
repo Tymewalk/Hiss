@@ -1,4 +1,4 @@
-import slither, pygame
+import slither
 
 snakey = slither.Sprite()
 snakey.costumeName = "costume0"

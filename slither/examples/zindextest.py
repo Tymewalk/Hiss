@@ -1,4 +1,4 @@
-import slither, pygame, time
+import slither
 
 # Normally, since Snakey was made before SoExcited, SoExcited would be rendered after Snakey and be put on top.
 snakey = slither.Sprite()
