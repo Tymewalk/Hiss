@@ -10,7 +10,7 @@
 # Also make sure to credit sources like StackOverflow.
 
 import pygame
-import sys, os, collections, warnings
+import sys, os, collections, warnings, math
 
 WIDTH, HEIGHT = (800, 600)
 SCREEN_SIZE = (WIDTH, HEIGHT)
@@ -133,6 +133,11 @@ class Sprite(Stage):
         '''Go to xpos, ypos.'''
         self.xpos = xpos
         self.ypos = ypos
+    
+    def moveSteps(self, numSteps):
+        """Move numSteps steps in the current direction"""
+        self.goto(self.xpos + math.cos(math.radians(self.direction)) * numSteps,
+                  self.ypos + math.sin(math.radians(self.direction)) * numSteps)
 
     def isVisible(self):
         '''Check if the object is visible, not just showing.'''
@@ -198,7 +203,7 @@ def blit(screen):
                     imageSize = image.get_size()
                     image = pygame.transform.scale(image, (int(imageSize[0] * obj.scale), int(imageSize[1] * obj.scale)))
                 if not obj.direction == 0:
-                    image = rotateCenter(image, obj.direction)
+                    image = rotateCenter(image, -obj.direction)
                 new_rect = image.get_rect()
                 new_rect.center = (obj.xpos, obj.ypos)
                 screen.blit(image, new_rect)
