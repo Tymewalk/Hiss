@@ -60,5 +60,16 @@ Began and currently works on documentation, also added sound support.
 ### @IronManMark20
 Is working on adding SVG support to slither.
 
+# Code of Conduct
+Rules to follow when contributing. Follow these and you should be fine.
+
+- Never push directly to master. Always make branches and pull requests. This is to make sure Slither stays as bug-free as possible.
+  - The only exception is minor changes or important bugfixes that can't wait for someone to review it.
+- Always ask for feedback before merging a pull request.
+- Only @Tymewalk should merge pull request that add features or change large portions of Slither.
+- Make a new issue if you want to propose a new release. Don't make releases without getting approval from other contributors.
+-  Have fun!
+
+
 # Credits
 Scratch is property of The Lifelong Kindergarten Group. The slither devs are not affiliated with the LLK, nor do they own Scratch.
