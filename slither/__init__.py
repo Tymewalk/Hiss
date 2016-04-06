@@ -74,9 +74,9 @@ class Stage():
 
     @costumeNumber.setter
     def costumeNumber(self, val):
-        if val < len(self.costumes.keys()): # TODO: use mod to wrap around
-            self.costumeName = list(self.costumes.keys())[val]
-            self._costumeNumber = val
+        val = val % len(self.costumes.keys())
+        self.costumeName = list(self.costumes.keys())[val]
+        self._costumeNumber = val
 
     @property
     def costumeName(self):
