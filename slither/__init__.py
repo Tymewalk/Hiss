@@ -63,7 +63,7 @@ class Stage():
 
     def deleteCostumeByNumber(self, number):
         '''Delete a costume by number.'''
-        if number < len(self.costumes.keys()):
+        if number < len(self.costumes):
             costumeName = self.costumes.keys()[number]
             self.deleteCostumeByName(costumeName) # TODO: Fix this stupid "get name from number" thing
 
@@ -74,7 +74,7 @@ class Stage():
 
     @costumeNumber.setter
     def costumeNumber(self, val):
-        val = val % len(self.costumes.keys())
+        val = val % len(self.costumes)
         self.costumeName = list(self.costumes.keys())[val]
         self._costumeNumber = val
 
@@ -165,6 +165,7 @@ class Sound():
                raise e
           return sound
 
+# Why is this here?
 slitherSound = Sound()
 
 def setup(caption=sys.argv[0]):
