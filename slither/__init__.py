@@ -131,8 +131,9 @@ class Sprite(Stage):
                   self.ypos + math.sin(math.radians(self.direction)) * numSteps)
 
     def isVisible(self):
-        '''Check if the object is visible, not just showing.'''
-        return self.showing and self.scale > 0
+        '''Check if the object is visible, not just showing.
+        This is better than Sprite.show because it also checks the scale.'''
+        return self.show and self.scale > 0
 
     def delete(self):
         '''Remove the sprite from the global sprites list, causing it not to be drawn.'''
