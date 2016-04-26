@@ -103,7 +103,7 @@ class Sprite(Stage):
         self.xpos = 0 # X Position
         self.ypos = 0 # Y Position
         self.direction = 0 # Direction is how much to change the direction, hence why it starts at 0 and not 90
-        self.showing = True
+        self.show = True
         self.scale = 1 # How much to multiply it by in the scale
         self.zindex = 0 # How high up are we in the "z" axis?
         sprites.append(self) # Add this sprite to the global list of sprites
@@ -120,14 +120,6 @@ class Sprite(Stage):
         self._zindex = val
         reorderSprites()
 
-    def show(self):
-        '''Show the sprite.'''
-        self.showing = True
-
-    def hide(self):
-        '''Hide the sprite.'''
-        self.showing = False
-
     def goto(self, xpos, ypos):
         '''Go to xpos, ypos.'''
         self.xpos = xpos
@@ -139,8 +131,9 @@ class Sprite(Stage):
                   self.ypos + math.sin(math.radians(self.direction)) * numSteps)
 
     def isVisible(self):
-        '''Check if the object is visible, not just showing.'''
-        return self.showing and self.scale > 0
+        '''Check if the object is visible, not just showing.
+        This is better than Sprite.show because it also checks the scale.'''
+        return self.show and self.scale > 0
 
     def delete(self):
         '''Remove the sprite from the global sprites list, causing it not to be drawn.'''
