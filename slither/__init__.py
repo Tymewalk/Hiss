@@ -103,7 +103,7 @@ class Sprite(Stage):
         self.xpos = 0 # X Position
         self.ypos = 0 # Y Position
         self.direction = 0 # Direction is how much to change the direction, hence why it starts at 0 and not 90
-        self.showing = True
+        self.show = True
         self.scale = 1 # How much to multiply it by in the scale
         self.zindex = 0 # How high up are we in the "z" axis?
         sprites.append(self) # Add this sprite to the global list of sprites
@@ -119,14 +119,6 @@ class Sprite(Stage):
         #    raise ValueError("zindex must be a non-negative integer")
         self._zindex = val
         reorderSprites()
-
-    def show(self):
-        '''Show the sprite.'''
-        self.showing = True
-
-    def hide(self):
-        '''Hide the sprite.'''
-        self.showing = False
 
     def goto(self, xpos, ypos):
         '''Go to xpos, ypos.'''
