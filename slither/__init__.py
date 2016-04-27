@@ -139,24 +139,29 @@ class Sprite(Stage):
         '''Remove the sprite from the global sprites list, causing it not to be drawn.'''
         sprites.remove(self)
 
+pygame.mixer.init(44100, -16, 2, 2048)
+
 class Sound():
-     def loadSound(self, name):
-          '''Load a sound. Set this function to a variable the call variable.play()'''
-          try:
-               pygame.mixer.get_init()
-          except:
-               pass
-          class NoneSound:
-               def play(self): pass
-          if not pygame.mixer:
-               return NoneSound()
-          fullname = os.path.join(scriptdir, name)
-          try:
-               sound = pygame.mixer.Sound(fullname)
-          except pygame.error as e:
-               print('Cannot load sound: %s' % fullame)
-               raise e
-          return sound
+    # Based on pygame examples, http://stackoverflow.com/questions/8690301/pygame-memoryerror
+    def loadSound(self, name):
+        '''Load a sound. Set this function to a variable then call variable.play()'''
+        try:
+            pygame.mixer.get_init()
+        except:
+            pass
+        class NoneSound:
+            def play(self): pass
+        if not pygame.mixer:
+            return NoneSound()
+        fullname = os.path.join(scriptdir, name)
+        try:
+            sound = pygame.mixer.Sound(fullname)
+        except pygame.error as e:
+            print ('Cannot load sound: %s' % fullname)
+            raise e
+        return sound
+
+slitherSound = Sound()
 
 # Why is this here?
 slitherSound = Sound()
