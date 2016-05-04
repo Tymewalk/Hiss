@@ -21,16 +21,16 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.2.1',
+    version='0.2.2',
 
     description='A Python module that uses PyGame to bring Scratch-like features to Python',
-    long_description='A Python module that uses PyGame to bring Scratch-like features to Python\nPyGame IS required for this module to work.',
+    long_description='A Python module that uses PyGame to bring Scratch-like features to Python. PyGame IS required for this module to work.',
 
     # The project's main homepage.
     url='https://github.com/PySlither/Slither',
 
     # Author details
-    author='Tymewalk',
+    author='The PySlither Devs',
     author_email='none',
 
     # Choose your license
@@ -53,6 +53,9 @@ setup(
 
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.2',
         'Programming Language :: Python :: 3.3',
