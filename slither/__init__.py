@@ -163,9 +163,6 @@ class Sound():
 
 slitherSound = Sound()
 
-# Why is this here?
-slitherSound = Sound()
-
 def setup(caption=sys.argv[0]):
     '''Sets up PyGame and returns a screen object that can be used with blit().'''
     global globalscreen
