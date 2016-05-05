@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Help Page</title>
+        <title>Slither - Help Page</title>
         <meta charset="utf-8">
     </head>
     <body>
@@ -27,17 +27,17 @@
             </code>
             <p>After you run this you'll get a green window.<b>So how does this work?</b> It uses a number of things that I'll explain step by step.</p>
             <p><b>import slither</b> Allows Slither to be used in your code.</p>
-            <p><b>slither.slitherStage.setColor()</b> Changes the background color, you enter values in the form of number, number, number where number represents a RGB value.</p>
-            <p><b>slither.setup()</b> Sets up slither allowing you to do cool things.</p>
-            <p><b>def loop():</b> This function is usually called 60 times a second (depending on fps), your program's main loop should be in here.</p>
-            <p><b>pass</b> For this example there is no main loop, pass skips the main loop.</p>
+            <p><b>slither.slitherStage.setColor()</b> Changes the background color, you enter values in the form of "number, number, number", where number represents a RGB value.</p>
+            <p><b>slither.setup()</b> Sets up Slither, similar to "pygame.init()".</p>
+            <p><b>def loop():</b> This function is usually called 60 times a second (depending on your FPS). Your program's main loop should be in here.</p>
+            <p><b>pass</b> For this example there is no main loop, so pass skips the main loop.</p>
             <p><b>slither.runMainLoop(loop)</b> This important fuction runs your main loop, you need this for your code to run.</p>
             
             <pre> </pre>
             <table style="font-family: serif; font-weight: 500; border-style: solid">
                 <tbody style="background-color: lightgrey"><tr><td><b>Stage Functions</b></td><td><b>Brief description</b></td></tr></tbody>
-                <tr><td>__init__()</td><td>Initilizes the stage and sprite costumes.</td></tr>
-                <tr><td>setColor()</td><td>Sets the stage color (Stage Only).</td></tr>
+                <tr><td>__init__()</td><td>Initilizes the stage and sprite costumes. You shouldn't call this manually.</td></tr>
+                <tr><td>setColor()</td><td>Sets the stage's background color (Stage Only).</td></tr>
                 <tr><td>addCostume()</td><td>Add a costume based on a given path and name.</td></tr>
                 <tr><td>deleteCostumeByName()</td><td>Delete a costume by name.</td></tr>
                 <tr><td>deleteCostumeByNumber()</td><td>Delete a costume by number.</td></tr>
@@ -47,24 +47,18 @@
                 <tr><td>getCostumeName()</td><td>Get the costume name of a sprite.</td></tr>
                 <tbody style="background-color: lightgrey"><tr><td><b>Sprite Functions</b></td><td><b>Brief description</b></td></tr></tbody>
                 <tr><td>__init__()</td><td>Initilizes a sprite.</td></tr>
-                <tr><td>changeXBy()</td><td>Change the sprite's X Position by (amount).</td></tr>
-                <tr><td>changeYBy()</td><td>Change the sprite's X Position by (amount).</td></tr>
-                <tr><td>goTo()</td><td>Go to a X and Y position.</td></tr>
-                <tr><td>setXTo()</td><td>Set the sprite's X position to (amount).</td></tr>
-                <tr><td>setYTo()</td><td>Set the sprite's Y position to (amount).</td></tr>
-                <tr><td>changeScaleBy()</td><td>Change the sprite's scale by (amount).</td></tr>
-                <tr><td>setScaleTo()</td><td>Set the sprite's scale to (amount).</td></tr>
-                <tr><td>getScale()</td><td>Get sprite's current scale.</td></tr>
-                <tr><td>setDirection()</td><td>Set the sprite's direction.</td></tr>
-                <tr><td>changeDirectionBy()</td><td>Change the sprite's direction by (amount).</td></tr>
-                <tr><td>getDirection()</td><td>Get the sprite's direction.</td></tr>
-                <tr><td>changeZIndexBy()</td><td>Change the sprite's z-index by (amount).</td></tr>
-                <tr><td>setZIndexTo()</td><td>Set the sprite's z-index to (amount).</td></tr>
-                <tr><td>getZIndex()</td><td>Get the sprite's z-index.</td></tr>
+                <tr><td>goto(x, y)</td><td>Tells the sprite to go to (x, y).</td></tr>
+                <tr><td>moveSteps(setps)</td><td>Move (steps) steps forward, based on direction.</td></tr>
                 <tr><td>isVisible()</td><td>Check if the object is visible, not just showing.</td></tr>
                 <tr><td>delete()</td><td>Remove the sprite from the global sprites list, causing it not to be drawn.</td></tr>
                 <tbody style="background-color: lightgrey"><tr><td><b>Sprite Variables</b></td><td><b>Brief description</b></td></tr></tbody>
-		<tr><td>Sprite.show</td><td>Set to "True" to show the sprite, set to "False" to hide it. Replaces "show()" and "hide()".</td></tr>
+		<tr><td>Sprite.currentCostume</td><td>The costume the sprite is set to (in the form of a Pygame rect).</td></tr>
+		<tr><td>Sprite.xpos</td><td>The X position of the sprite.</td></tr>
+		<tr><td>Sprite.ypos</td><td>The Y position of the sprite.</td></tr>
+		<tr><td>Sprite.direction</td><td>Which direction the sprite is pointing in. Sprites point to 0 by default.</td></tr>
+		<tr><td>Sprite.show</td><td>Set to "True" to show the sprite, set to "False" to hide it. Replaces "show()" and "hide()" from v0.2.2 on.</td></tr>
+		<tr><td>Sprite.scale</td><td>How big the sprite is. Set to 1 by default.</td></tr>
+		<tr><td>Sprite.zindex</td><td>Default is 0. Determines how high up the sprite is. For example, a sprite with a z-index of 1 will be drawn above a sprite with a z-index of 0.</td></tr>
                 <tbody style="background-color: lightgrey"><tr><td><b>Other Functions</b></td><td><b>Brief description</b></td></tr></tbody>
                 <tr><td>setup()</td><td>Sets up PyGame and returns a screen object that can be used with blit().</td></tr>
                 <tr><td>blit()</td><td>Draw all graphic changes on the screen. This must be called to display graphics.</td></tr>
