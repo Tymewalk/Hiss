@@ -23,7 +23,7 @@ Those just getting started with Python after using Scratch may want to go straig
 
 ## How can I help with Slither?
 Check the issues to see what problems need fixing. Then make a pull request detailing what you've changed and how it should help. After testing, someone will merge it into the main project.<br />
-If you help enough times, @Tymewalk will add you as a collaborator.<br />
+If you help enough times, Tymewalk will add you as a collaborator.<br />
 **WARNING: Abuse of collaborator permissions WILL result in you being removed as a collaborator.**<br />
 So just be careful with what you do and you'll be fine.<br />
 
@@ -48,19 +48,19 @@ If you've done all three of those things and it still doesn't work, file an issu
 # Contributors
 A list of all contributors who have helped or are helping.
 
-### @Tymewalk
-Started Slither, added several groundwork features.
+### Tymewalk
+Started Slither, and added several groundwork features.
 
-### @BookOwl
+### BookOwl
 Helped majorly rewrite Slither so it's easier to code in. Additionally helped suggest and add changes that helped Slither get many important features.
 
-### @Omegabyte
+### Omegabyte
 Began and currently works on documentation, also added sound support.
 
-### @IronManMark20
-Is working on adding SVG support to slither.
+### IronManMark20
+Currently working on adding SVG support to slither.
 
-### @Icelys
+### Icelys
 Helped with a small costume changing fix.
 
 # Code of Conduct
@@ -70,7 +70,7 @@ Rules to follow when contributing. Follow these and you should be fine.
   - Additionally, wait to merge until you're sure your code is bug-free and/or someone has reviewed it.
   - The only exception is minor changes or important bugfixes that can't wait for someone to review it.
 - Always ask for feedback before merging a pull request.
-- Only @Tymewalk should merge pull requests that add features or change large portions of Slither.
+- Only Tymewalk should merge pull requests that add big features or change large portions of Slither.
 - Make a new issue if you want to propose a new release. Don't make releases without getting approval from other contributors.
 - Most importantly, have fun!
 
