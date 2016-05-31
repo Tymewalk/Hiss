@@ -6,9 +6,6 @@
 # https://github.com/PySlither/Slither
 # and make a pull request!
 
-# Contributors: If your code doesn't seem straightforward, make comments so other people know what's going on
-# Also make sure to credit sources like StackOverflow.
-
 import pygame
 import sys, os, collections, warnings, math
 
@@ -35,7 +32,7 @@ except AttributeError:
 # Convienience functions
 # Taken from http://stackoverflow.com/questions/4183208/how-do-i-rotate-an-image-around-its-center-using-pygame
 def rotateCenter(image, angle):
-    """rotate a Surface, maintaining position."""
+    '''rotate a Surface, maintaining position.'''
     rot_sprite = pygame.transform.rotate(image, angle)
     return rot_sprite
 
@@ -110,7 +107,7 @@ class Sprite(Stage):
 
     @property
     def zindex(self):
-        "The location of the sprite in the z-axis"
+        '''The location of the sprite in the z-axis. Those with higher z-indexes are displayed above those with lower ones.'''
         return self._zindex
 
     @zindex.setter
@@ -206,7 +203,7 @@ def blit(screen):
     pygame.display.flip()
 
 def registerCallback(eventname, func=None):
-    "Register the function func to handle the event eventname"
+    '''Register the function func to handle the event eventname'''
     if func:
         # Direct call (registerCallback(pygame.QUIT, func))
         eventCallbacks[eventname] = func
