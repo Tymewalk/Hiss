@@ -32,10 +32,10 @@ So just be careful with what you do and you'll be fine.<br />
 Nothing. I'll look it over and fix what needs to be fixed.
 
 ### As a collaborator
-If it's a small change, go ahead and commit it to master.
+If it's a small change, go ahead and commit it to master.<br />
 Examples of small changes include "Fix spelling error", "Properly indent code", etc.
 
-If it's a big change, make a new branch and then a pull request for it.
+If it's a big change, make a new branch and then a pull request for it.<br />
 Examples of big changes include adding new functions, re-writing a lot of code, etc.
 
 ## Uh-oh! There's a problem!
@@ -74,6 +74,11 @@ Rules to follow when contributing. Follow these and you should be fine.
 - Make a new issue if you want to propose a new release. Don't make releases without getting approval from other contributors.
 - Most importantly, have fun!
 
+# Minor Rules
+You won't get removed if you don't follow these, but it's recommended that you do.
+
+- Add comments to your code if it doesn't seem straightforward.
+- Credit sources such as StackOverflow.
 
 # Credits
 Scratch is property of The Lifelong Kindergarten Group. The Slither devs are not affiliated with the LLK, nor do they own Scratch.
