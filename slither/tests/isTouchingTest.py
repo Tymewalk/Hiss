@@ -4,10 +4,10 @@ import slither
 toucher = slither.Sprite()
 toucher.addCostume("assets/arrow.png", "arrow")
 toucher.costumeName = "arrow"
-toucher.goto(0, 75)
+toucher.goto(0, 100)
 
 snakey = slither.Sprite()
-snakey.goto(slither.WIDTH // 2, 75)
+snakey.goto(slither.WIDTH // 2, 100)
 
 def run_a_frame():
     toucher.moveSteps(3)

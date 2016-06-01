@@ -138,7 +138,8 @@ class Sprite(Stage):
         '''Detects if one sprite is touching another.'''
         ourRect = self.currentCostume.get_rect()
         theirRect = collideSprite.currentCostume.get_rect()
-        
+        ourRect.center = (self.xpos, self.ypos)
+        theirRect.center = (collideSprite.xpos, collideSprite.ypos)
         return ourRect.colliderect(theirRect)
 
 pygame.mixer.init(44100, -16, 2, 2048)
