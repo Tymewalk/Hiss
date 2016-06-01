@@ -73,6 +73,7 @@ class Stage():
     def costumeNumber(self, val):
         val = val % len(self.costumes)
         self.costumeName = list(self.costumes.keys())[val]
+        self.currentCostume = self.costumes[self.costumeName]
         self._costumeNumber = val
 
     @property
@@ -83,10 +84,7 @@ class Stage():
     @costumeName.setter
     def costumeName(self, val):
         if val in self.costumes:
-            self.recalculateCostumeDataFromName(val)
-
-    def recalculateCostumeDataFromName(self, name):
-            self._costumeName = name
+            self._costumeName = val
             self.currentCostume = self.costumes[self.costumeName]
 
 
