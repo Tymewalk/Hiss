@@ -136,6 +136,13 @@ class Sprite(Stage):
         '''Remove the sprite from the global sprites list, causing it not to be drawn.'''
         sprites.remove(self)
 
+    def isTouching(self, collideSprite):
+        '''Detects if one sprite is touching another.'''
+        ourRect = self.currentCostume.get_rect
+        theirRect = collideSprite.currentCostume.get_rect
+
+        return ourRect.colliderect(theirRect)
+
 pygame.mixer.init(44100, -16, 2, 2048)
 
 class Sound():
