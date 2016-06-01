@@ -138,8 +138,8 @@ class Sprite(Stage):
 
     def isTouching(self, collideSprite):
         '''Detects if one sprite is touching another.'''
-        ourRect = self.currentCostume.get_rect
-        theirRect = collideSprite.currentCostume.get_rect
+        ourRect = self.currentCostume.get_rect()
+        theirRect = collideSprite.currentCostume.get_rect()
 
         return ourRect.colliderect(theirRect)
 
