@@ -23,11 +23,18 @@ eventCallbacks = {
                 } # Create a dict of callbacks that do nothing
 globalscreen = None
 
+keysPressed = []
+
 try:
     scriptdir = os.path.dirname(os.path.realpath(__import__("__main__").__file__))
 except AttributeError:
     warnings.warn("Couldn't find scripts dir, some functions may not work.")
     scriptdir = os.path.realpath(".")
+
+
+def keysDown():
+    "returns the keys that are currently pressed"
+    return keysPressed[:]
 
 # Convienience functions
 # Taken from http://stackoverflow.com/questions/4183208/how-do-i-rotate-an-image-around-its-center-using-pygame
@@ -235,6 +242,10 @@ def runMainLoop(frameFunc):
                     pygame.quit()
                     sys.exit()
             else:
+                if event.type == pygame.KEYDOWN:
+                    keysPressed.append(pygame.key.name(event.key))
+                elif event.type == pygame.KEYUP:
+                    keysPressed.remove(pygame.key.name(event.key))
                 eventCallbacks[event.type](event)
                 # eventCallbacks would be a dictionary mapping
                 # event types to handler functions.
