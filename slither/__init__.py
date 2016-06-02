@@ -73,6 +73,7 @@ class Stage():
     def costumeNumber(self, val):
         val = val % len(self.costumes)
         self.costumeName = list(self.costumes.keys())[val]
+        self.currentCostume = self.costumes[self.costumeName]
         self._costumeNumber = val
 
     @property
@@ -83,10 +84,7 @@ class Stage():
     @costumeName.setter
     def costumeName(self, val):
         if val in self.costumes:
-            self.recalculateCostumeDataFromName(val)
-
-    def recalculateCostumeDataFromName(self, name):
-            self._costumeName = name
+            self._costumeName = val
             self.currentCostume = self.costumes[self.costumeName]
 
 
@@ -135,6 +133,14 @@ class Sprite(Stage):
     def delete(self):
         '''Remove the sprite from the global sprites list, causing it not to be drawn.'''
         sprites.remove(self)
+
+    def isTouching(self, collideSprite):
+        '''Detects if one sprite is touching another.'''
+        ourRect = self.currentCostume.get_rect()
+        theirRect = collideSprite.currentCostume.get_rect()
+        ourRect.center = (self.xpos, self.ypos)
+        theirRect.center = (collideSprite.xpos, collideSprite.ypos)
+        return ourRect.colliderect(theirRect)
 
 pygame.mixer.init(44100, -16, 2, 2048)
 
