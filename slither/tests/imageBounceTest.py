@@ -1,4 +1,4 @@
-import slither
+from slither import *
 
 def create_circle():
     circle = slither.Sprite()
