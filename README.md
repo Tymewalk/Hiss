@@ -57,7 +57,7 @@ Helped majorly rewrite Slither so it's easier to code in. Additionally helped su
 ### Omegabyte
 Began and currently works on documentation, also added sound support.
 
-### IronManMark20
+### Ethanhs
 Currently working on adding SVG support to slither.
 
 ### Icelys
