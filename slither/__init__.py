@@ -1,1 +1,1 @@
-__all__ = ['slither']
+__all__ = ['slither','Mouse','Stage','Sprite','Sound']
