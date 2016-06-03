@@ -1,7 +1,7 @@
 # usr/bin/env python3
 # mouseTest.py
 
-import slither
+from slither import *
 from slither import Mouse
 
 def run_a_frame():
