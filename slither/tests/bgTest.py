@@ -1,4 +1,5 @@
-import slither, math
+import math
+from slither import *
 
 snakey = slither.Sprite()
 snakey.ypos = 460
