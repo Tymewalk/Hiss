@@ -1,4 +1,4 @@
-import slither
+from slither import *
 
 snakey = slither.Sprite()
 snakey.costumeName = "costume0" # You can set the default costume (costume0) by name...
