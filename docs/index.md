@@ -19,7 +19,7 @@ If that doesn't work, run `python setup.py bdist_wheel`, and then run `pip insta
 If it still fails, make sure you have `setuptools` fully updated and properly installed.<br />
 Remember to add `import slither` in your script.<br />
 
-Note that you must have PyGame installed in order to use Slither.
+Slither supports both Python 2 and Python 3. Also, note that you must have PyGame installed in order to use Slither.
 
 
 # Uh-oh! There's a problem!
