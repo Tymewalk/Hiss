@@ -36,4 +36,4 @@ If you help enough times, Tymewalk will add you as a collaborator.<br />
 So just be careful with what you do and you'll be fine.
 
 # Credits
-Scratch is property of The Lifelong Kindergarten Group. The Slither devs are not affiliated with the LLK, nor do they own Scratch. Slither is in no way associated with the LLK.
+Scratch is property of The Lifelong Kindergarten Group. The Slither devs are not affiliated with the LLK, nor do they own Scratch. Slither is in no way associated with, and is not a product of, the LLK.
