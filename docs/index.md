@@ -4,7 +4,7 @@
 
 # What is Slither?
 Slither is a Python module that uses PyGame to bring Scratch-like features to Python.
-[Scratch](scratch.mit.edu) is a programming language developed by MIT that uses block-based scripts to introduce kids to programming.
+[Scratch](https://scratch.mit.edu) is a programming language developed by MIT that uses block-based scripts to introduce kids to programming.
 
 # Why use Slither?
 Those just getting started with Python after using Scratch may want to go straight from one GUI to another. Slither allows those people to quickly make simple projects in a matter of minutes, while also learning Python.
@@ -19,7 +19,7 @@ If that doesn't work, run `python setup.py bdist_wheel`, and then run `pip insta
 If it still fails, make sure you have `setuptools` fully updated and properly installed.<br />
 Remember to add `import slither` in your script.<br />
 
-Slither supports both Python 2 and Python 3. Also, note that you must have PyGame installed in order to use Slither.
+Slither supports both Python 2 and Python 3. Also, note that you must have [PyGame](http://pygame.org/hifi.html) installed in order to use Slither.
 
 
 # Uh-oh! There's a problem!
@@ -27,13 +27,13 @@ First, check to make sure you've properly installed all of Slither's requirement
 Next, check your Python program over. Do you have correct syntax and spelling?<br />
 Finally, check to see if you have the newest version of Slither.
 
-If you've done all three of those things and it still doesn't work, file an issue.
+If you've done all three of those things and it still doesn't work, [file an issue](https://github.com/PySlither/Slither/issues/new).
 
 # How can I help with Slither?
-Check the issues to see what problems need fixing. Then make a pull request detailing what you've changed and how it should help. After testing, someone will merge it into the main project.<br />
+Check [the issues](https://github.com/PySlither/Slither/issues) to see what problems need fixing. Then [make a pull request](https://github.com/PySlither/Slither/compare) detailing what you've changed and how it should help. After testing, someone will merge it into the main project.<br />
 If you help enough times, Tymewalk will add you as a collaborator.<br />
 **WARNING: Abuse of collaborator permissions WILL result in you being removed as a collaborator.**<br />
 So just be careful with what you do and you'll be fine.
 
 # Credits
-Scratch is property of The Lifelong Kindergarten Group. The Slither devs are not affiliated with the LLK, nor do they own Scratch.
+Scratch is property of The Lifelong Kindergarten Group. The Slither devs are not affiliated with the LLK, nor do they own Scratch. Slither is in no way associated with the LLK.
