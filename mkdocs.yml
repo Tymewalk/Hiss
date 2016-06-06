@@ -1,0 +1,5 @@
+site_name: Slither
+theme: flatly
+pages:
+- Home: index.md
+- Reference: reference.md
