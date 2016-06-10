@@ -1,5 +1,5 @@
 # isTouchingTest.py
-from slither import *
+import slither
 
 toucher = slither.Sprite()
 toucher.addCostume("assets/arrow.png", "arrow")
