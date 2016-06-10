@@ -1,5 +1,5 @@
 # Sound works, make sure your volume is up.
-from slither import *
+import slither
 
 sound = slither.slitherSound.loadSound('assets/boom.wav')
 sound.play()
