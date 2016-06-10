@@ -1,7 +1,7 @@
 # usr/bin/env python3
 # mouseTest.py
 
-from slither import *
+import slither
 
 def run_a_frame():
     print(Mouse.buttonsPressed())
