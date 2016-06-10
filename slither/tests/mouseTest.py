@@ -2,7 +2,6 @@
 # mouseTest.py
 
 import slither
-from slither import Mouse
 
 def run_a_frame():
     print(Mouse.buttonsPressed())

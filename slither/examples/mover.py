@@ -1,5 +1,6 @@
 # mover.py
-import slither, pygame # We need pygame for the event constants and the key functions
+import pygame # We need pygame for the event constants and the key functions
+import slither
 from pygame.locals import *
 
 sprite = slither.Sprite()
