@@ -1,5 +1,5 @@
 # moveStepsTest.py
-from slither import *
+import slither
 
 sprite = slither.Sprite()
 sprite.addCostume("assets/arrow.png", "arrow")
