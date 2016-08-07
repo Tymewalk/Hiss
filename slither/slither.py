@@ -238,13 +238,15 @@ class Sound():
 slitherSound = Sound()
 
 # Convienience function to blit text
-def blitText(text, x=0, y=0, size=12, font=False, fontPath=False):
+def blitText(text, x=0, y=0, size=12, font=False, fontPath=False, antialias=0, color=(0,0,0)):
     if font:
         textFont = pygame.font.SysFont(font, size)
     elif fontPath:
         textFont = pygame.font.Font(fontPath, size)
     else:
         textFont = pygame.font.SysFont("Helvetica", size)
+
+    textImage = textFont.render(text, antialias, color)
 
 def setup(caption=sys.argv[0]):
     '''Sets up PyGame and returns a screen object that can be used with blit().'''
