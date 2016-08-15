@@ -251,6 +251,8 @@ def blitText(text, x=0, y=0, size=12, font=False, fontPath=False, antialias=0, c
 
     globalscreen.blit(textImage, (x, y))
 
+    pygame.display.flip()
+
 def setup(caption=sys.argv[0]):
     '''Sets up PyGame and returns a screen object that can be used with blit().'''
     global globalscreen
