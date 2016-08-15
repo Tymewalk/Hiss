@@ -244,9 +244,11 @@ def blitText(text, x=0, y=0, size=12, font=False, fontPath=False, antialias=0, c
     elif fontPath:
         textFont = pygame.font.Font(fontPath, size)
     else:
-        textFont = pygame.font.SysFont("Helvetica", size)
+        textFont = pygame.font.SysFont("Helvetica", size) # Users should always have Helvetica installed
 
     textImage = textFont.render(text, antialias, color)
+
+    slitherStage.blit(textImage, (x, y))
 
 def setup(caption=sys.argv[0]):
     '''Sets up PyGame and returns a screen object that can be used with blit().'''
