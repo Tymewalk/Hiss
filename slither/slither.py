@@ -239,6 +239,7 @@ slitherSound = Sound()
 
 # Convienience function to blit text
 def blitText(text, x=0, y=0, size=12, font=False, fontPath=False, antialias=0, color=(0,0,0)):
+    global globalscreen
     if font:
         textFont = pygame.font.SysFont(font, size)
     elif fontPath:
@@ -248,12 +249,13 @@ def blitText(text, x=0, y=0, size=12, font=False, fontPath=False, antialias=0, c
 
     textImage = textFont.render(text, antialias, color)
 
-    slitherStage.blit(textImage, (x, y))
+    globalscreen.blit(textImage, (x, y))
 
 def setup(caption=sys.argv[0]):
     '''Sets up PyGame and returns a screen object that can be used with blit().'''
     global globalscreen
     pygame.init()
+    pygame.font.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
     caption = pygame.display.set_caption(caption)
     globalscreen = screen
