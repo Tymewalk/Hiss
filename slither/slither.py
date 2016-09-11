@@ -108,12 +108,12 @@ class Mouse:
         return bool(pygame.mouse.get_focused())
     
 # Stage class
-class Stage():
+class Stage(object):
     def __init__(self):
         self.snakey = pygame.image.load(os.path.join(os.path.dirname(__file__), "snakey.png"))
         self.costumes = collections.OrderedDict({"costume0" : self.snakey})
-        self.costumeNumber = 0
-        self.costumeName = "costume0"
+        self._costumeNumber = 0
+        self._costumeName = "costume0"
         self.currentCostume = None
         self.bgColor = (255, 255, 255)
 
@@ -122,7 +122,7 @@ class Stage():
         '''Add a costume based on a given path and name.'''
         costume = pygame.image.load(os.path.join(scriptdir, costumePath))
         self.costumes[costumeName] = costume
-        self.costumeName = costumeName # Switch to the new costume
+        self._costumeName = costumeName # Switch to the new costume
 
     def deleteCostumeByName(self, name):
         '''Delete a costume by name.'''
@@ -143,7 +143,7 @@ class Stage():
     @costumeNumber.setter
     def costumeNumber(self, val):
         val = val % len(self.costumes)
-        self.costumeName = list(self.costumes.keys())[val]
+        self._costumeName = list(self.costumes.keys())[val]
         self.currentCostume = self.costumes[self.costumeName]
         self._costumeNumber = val
 
@@ -171,7 +171,7 @@ class Sprite(Stage):
         self.direction = 0 # Direction is how much to change the direction, hence why it starts at 0 and not 90
         self.show = True
         self.scale = 1 # How much to multiply it by in the scale
-        self.zindex = 0 # How high up are we in the "z" axis?
+        self._zindex = 0 # How high up are we in the "z" axis?
         sprites.append(self) # Add this sprite to the global list of sprites
 
     @property
