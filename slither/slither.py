@@ -251,7 +251,7 @@ def blitText(text, x=0, y=0, size=12, font=False, fontPath=False, antialias=0, c
 
     globalscreen.blit(textImage, (x, y))
 
-    pygame.display.flip()
+    #pygame.display.flip()
 
 def setup(caption=sys.argv[0]):
     '''Sets up PyGame and returns a screen object that can be used with blit().'''
@@ -294,7 +294,7 @@ def blit(screen):
                 new_rect.center = (obj.xpos, obj.ypos)
                 screen.blit(image, new_rect)
 
-    pygame.display.flip()
+    #pygame.display.flip()
 
 def registerCallback(eventname, func=None):
     '''Register the function func to handle the event eventname'''
@@ -330,4 +330,5 @@ def runMainLoop(frameFunc):
                 eventCallbacks[event.type](event)
                 # eventCallbacks would be a dictionary mapping
                 # event types to handler functions.
+        pygame.display.flip() # Always flip at the end
         clock.tick(projectFPS) # Run at however many FPS the user specifies

@@ -7,6 +7,6 @@ slither.setup() # Begin slither
 slither.blitText("Hello, world!")
 
 def run_a_frame():
-    slither.blitText("Hello, world!")
+    slither.blitText("Hello, world!", size=40)
 
 slither.runMainLoop(run_a_frame)
