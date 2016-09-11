@@ -237,10 +237,27 @@ class Sound():
 
 slitherSound = Sound()
 
+# Convienience function to blit text
+def blitText(text, x=0, y=0, size=12, font=False, fontPath=False, antialias=0, color=(0,0,0)):
+    global globalscreen
+    if font:
+        textFont = pygame.font.SysFont(font, size)
+    elif fontPath:
+        textFont = pygame.font.Font(fontPath, size)
+    else:
+        textFont = pygame.font.SysFont("Helvetica", size) # Users should always have Helvetica installed
+
+    textImage = textFont.render(text, antialias, color)
+
+    globalscreen.blit(textImage, (x, y))
+
+    #pygame.display.flip()
+
 def setup(caption=sys.argv[0]):
     '''Sets up PyGame and returns a screen object that can be used with blit().'''
     global globalscreen
     pygame.init()
+    pygame.font.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
     caption = pygame.display.set_caption(caption)
     globalscreen = screen
@@ -277,7 +294,7 @@ def blit(screen):
                 new_rect.center = (obj.xpos, obj.ypos)
                 screen.blit(image, new_rect)
 
-    pygame.display.flip()
+    #pygame.display.flip()
 
 def registerCallback(eventname, func=None):
     '''Register the function func to handle the event eventname'''
@@ -313,4 +330,5 @@ def runMainLoop(frameFunc):
                 eventCallbacks[event.type](event)
                 # eventCallbacks would be a dictionary mapping
                 # event types to handler functions.
+        pygame.display.flip() # Always flip at the end
         clock.tick(projectFPS) # Run at however many FPS the user specifies
