@@ -108,7 +108,7 @@ class Mouse:
         return bool(pygame.mouse.get_focused())
     
 # Stage class
-class Stage():
+class Stage(object):
     def __init__(self):
         self.snakey = pygame.image.load(os.path.join(os.path.dirname(__file__), "snakey.png"))
         self.costumes = collections.OrderedDict({"costume0" : self.snakey})
@@ -142,8 +142,11 @@ class Stage():
 
     @costumeNumber.setter
     def costumeNumber(self, val):
+        print "Setting to %s" % (str(val))
         val = val % len(self.costumes)
+        print "Evaluated to %s" % (str(val))
         self.costumeName = list(self.costumes.keys())[val]
+        print "Evaluated to %s" % (self.costumeName)
         self.currentCostume = self.costumes[self.costumeName]
         self._costumeNumber = val
 
@@ -173,6 +176,7 @@ class Sprite(Stage):
         self.scale = 1 # How much to multiply it by in the scale
         self.zindex = 0 # How high up are we in the "z" axis?
         sprites.append(self) # Add this sprite to the global list of sprites
+        print "Sprite made"
 
     @property
     def zindex(self):
