@@ -7,9 +7,18 @@
 # and make a pull request!
 
 import pygame
-import cairosvg
 import sys, os, collections, warnings, math
 import tempfile, shutil, atexit
+try:
+    import cairosvg
+except:
+    svgSupport = False
+    warnings.warn("Can not import cairosvg, svg support is disabled. Probable fix: install Cairo")
+else:
+    svgSupport = True
+
+class NoSVGSupportError(Exception):
+    pass
 
 WIDTH, HEIGHT = (800, 600)
 SCREEN_SIZE = (WIDTH, HEIGHT)
@@ -34,7 +43,6 @@ except AttributeError:
     scriptdir = os.path.realpath(".")
 
 tempdir = tempfile.mkdtemp(prefix="PySlither-")
-print(tempdir)
 @atexit.register
 def _clean_temp_dir():
     "Cleans the temp dir when the program quits"
@@ -115,10 +123,37 @@ class Mouse:
     def isFocused():
         return bool(pygame.mouse.get_focused())
 
+class _SVG:
+    "A class that handles resizing the SVG correctly"
+    def __init__(self, costumePath, scale):
+        if not svgSupport:
+            raise NoSVGSupportError("You do not have cairosvg installed correctly")
+        self.costumePath = costumePath
+        self.scale = scale
+        self.createImage()
+
+    def createImage(self):
+        name = os.path.splitext(os.path.basename(self.costumePath))[0] + ".png"
+        in_ = os.path.join(scriptdir, self.costumePath)
+        path = os.path.join(tempdir, name)
+        cairosvg.svg2png(url=in_, write_to=path, scale=self.scale)
+        self.img = pygame.image.load(path)
+
+    def resize(self, scale):
+        self.scale = scale
+        self.createImage()
+
+class _PNG:
+    "Dummy class to make SVG and PNG costumes the same"
+    def __init__(self, img):
+        self.img = img
+    def resize(self, scale):
+        pass
+
 # Stage class
 class Stage(object):
     def __init__(self):
-        self.snakey = pygame.image.load(os.path.join(os.path.dirname(__file__), "snakey.png"))
+        self.snakey = _PNG(pygame.image.load(os.path.join(os.path.dirname(__file__), "snakey.png")))
         self.costumes = collections.OrderedDict({"costume0" : self.snakey})
         self._costumeNumber = 0
         self._costumeName = "costume0"
@@ -126,16 +161,13 @@ class Stage(object):
         self.bgColor = (255, 255, 255)
 
     # Functions shared by sprites
-    def addCostume(self, costumePath, costumeName, s=1):
+    def addCostume(self, costumePath, costumeName):
         '''Add a costume based on a given path and name.'''
         if os.path.splitext(costumePath)[1] in (".svg", ".svgx"):
-            name = os.path.splitext(os.path.basename(costumePath))[0] + ".png"
-            in_ = os.path.join(scriptdir, costumePath)
-            path = os.path.join(tempdir, name)
-            cairosvg.svg2png(url=in_, write_to=path, scale=s)
+            costume = _SVG(costumePath, self.scale if hasattr(self, "scale") else 1)
         else:
             path = os.path.join(scriptdir, costumePath)
-        costume = pygame.image.load(path)
+            costume = _PNG(pygame.image.load(path))
         self.costumes[costumeName] = costume
         self._costumeName = costumeName # Switch to the new costume
 
@@ -185,7 +217,7 @@ class Sprite(Stage):
         self.ypos = 0 # Y Position
         self.direction = 0 # Direction is how much to change the direction, hence why it starts at 0 and not 90
         self.show = True
-        self.scale = 1 # How much to multiply it by in the scale
+        self._scale = 1 # How much to multiply it by in the scale
         self._zindex = 0 # How high up are we in the "z" axis?
         sprites.append(self) # Add this sprite to the global list of sprites
 
@@ -200,6 +232,15 @@ class Sprite(Stage):
         #    raise ValueError("zindex must be a non-negative integer")
         self._zindex = val
         reorderSprites()
+
+    @property
+    def scale(self):
+        return self._scale
+
+    @scale.setter
+    def scale(self, val):
+        self._scale = val
+        self.currentCostume.resize(self._scale)
 
     def goto(self, xpos, ypos):
         '''Go to xpos, ypos.'''
@@ -222,8 +263,8 @@ class Sprite(Stage):
 
     def isTouching(self, collideSprite):
         '''Detects if one sprite is touching another.'''
-        ourRect = self.currentCostume.get_rect()
-        theirRect = collideSprite.currentCostume.get_rect()
+        ourRect = self.currentCostume.img.get_rect()
+        theirRect = collideSprite.currentCostume.img.get_rect()
         ourRect.center = (self.xpos, self.ypos)
         theirRect.center = (collideSprite.xpos, collideSprite.ypos)
         return ourRect.colliderect(theirRect)
@@ -298,13 +339,13 @@ def blit(screen):
         screen.fill(slitherStage.bgColor)
 
         if slitherStage.currentCostume:
-            screen.blit(pygame.transform.scale(slitherStage.currentCostume, SCREEN_SIZE), (0, 0))
+            screen.blit(pygame.transform.scale(slitherStage.currentCostume.img, SCREEN_SIZE), (0, 0))
 
         for obj in sprites:
             if obj.isVisible(): # Check if the object is showing before we do anything
-                image = obj.currentCostume # So we can modify it and blit the modified version easily
+                image = obj.currentCostume.img # So we can modify it and blit the modified version easily
                 # These next few blocks of code check if the object has the defaults before doing anything.
-                if not obj.scale == 1:
+                if not obj.scale == 1 and not isinstance(obj.currentCostume, _SVG):
                     imageSize = image.get_size()
                     image = pygame.transform.scale(image, (int(imageSize[0] * obj.scale), int(imageSize[1] * obj.scale)))
                 if not obj.direction == 0:

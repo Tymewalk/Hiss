@@ -1,16 +1,16 @@
 import slither
-import cairosvg
-print(cairosvg.__version__)
 
 cat = slither.Sprite()
-cat.addCostume("assets/gear.svg", "cat", 1)
+cat.addCostume("assets/cat.svg", "cat")
 cat.costumeNumber = 1
+cat.scale = 1.5
 
-cat.goto(300, 310)
+cat.goto(175, 300)
 
 cat2 = slither.Sprite()
-cat2.addCostume("assets/cogwheel.svg", "cat", 2)
+cat2.addCostume("assets/cat.svg", "cat")
 cat2.costumeNumber = 1
+cat2.scale = 5
 
 cat2.goto(500, 300)
 
@@ -18,8 +18,7 @@ cat2.goto(500, 300)
 slither.setup() # Begin slither
 
 def run_a_frame():
-    cat.direction -= 1
-    cat2.direction += 1
+    cat.direction += 2
 
 
 slither.runMainLoop(run_a_frame)
