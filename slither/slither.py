@@ -126,16 +126,15 @@ class Stage(object):
         self.bgColor = (255, 255, 255)
 
     # Functions shared by sprites
-    def addCostume(self, costumePath, costumeName):
+    def addCostume(self, costumePath, costumeName, s=1):
         '''Add a costume based on a given path and name.'''
         if os.path.splitext(costumePath)[1] in (".svg", ".svgx"):
             name = os.path.splitext(os.path.basename(costumePath))[0] + ".png"
             in_ = os.path.join(scriptdir, costumePath)
             path = os.path.join(tempdir, name)
-            cairosvg.svg2png(url=in_, write_to=path)
+            cairosvg.svg2png(url=in_, write_to=path, scale=s)
         else:
             path = os.path.join(scriptdir, costumePath)
-        print(path)
         costume = pygame.image.load(path)
         self.costumes[costumeName] = costume
         self._costumeName = costumeName # Switch to the new costume

@@ -79,7 +79,7 @@ setup(
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
     install_requires=[
-      "CairoSVG",
+      "cairosvg==2.0.0rc6",
     ],
 
     # List additional groups of dependencies here (e.g. development
