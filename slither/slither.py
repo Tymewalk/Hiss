@@ -47,66 +47,66 @@ class Mouse:
     """A class for getting and setting mouse properties
     This is a static class, all functions should be called directly through the class"""
     _v = True
-    
+
     @staticmethod
     def buttonsPressed():
-        """Returns a three-tuple of bools that gives the state 
+        """Returns a three-tuple of bools that gives the state
         of the left, middle, and right buttons"""
         return tuple(bool(state) for state in pygame.mouse.get_pressed())
-    
+
     @staticmethod
     def leftPressed():
         return Mouse.buttonsPressed()[0]
-    
+
     @staticmethod
     def middlePressed():
         return Mouse.buttonsPressed()[1]
-    
+
     @staticmethod
     def rightPressed():
         return Mouse.buttonsPressed()[2]
-    
+
     @staticmethod
     def pos():
         return pygame.mouse.get_pos()
-    
+
     @staticmethod
     def xPos():
         return Mouse.pos()[0]
-    
+
     @staticmethod
     def yPos():
         return Mouse.pos()[1]
-    
+
     @staticmethod
     def relativeMovement():
         "Returns how much the mouse has moved since the last call to this function"
         return pygame.mouse.get_rel()
-    
+
     @staticmethod
     def setPos(x, y):
         pygame.mouse.set_pos(x, y)
-        
+
     @staticmethod
     def setXPos(x):
         pygame.mouse.set_pos(x, Mouse.yPos())
-        
+
     @staticmethod
     def setYPos(y):
         pygame.mouse.set_pos(Mouse.xPos(), y)
-        
+
     @staticmethod
     def isVisible():
         return Mouse._v
-    
+
     @staticmethod
     def setVisible(status):
         Mouse._v = pygame.mouse.set_visible(status)
-        
+
     @staticmethod
     def isFocused():
         return bool(pygame.mouse.get_focused())
-    
+
 # Stage class
 class Stage(object):
     def __init__(self):
@@ -190,7 +190,7 @@ class Sprite(Stage):
         '''Go to xpos, ypos.'''
         self.xpos = xpos
         self.ypos = ypos
-    
+
     def moveSteps(self, numSteps):
         """Move numSteps steps in the current direction"""
         self.goto(self.xpos + math.cos(math.radians(self.direction)) * numSteps,
@@ -268,6 +268,10 @@ def setFPS(fps):
     '''Set the FPS of the project. Default is 60, and Scratch runs at 30.'''
     global projectFPS
     projectFPS = fps # projectFPS is the FPS that the main loop uses
+
+def setCaption(caption):
+    "Sets the screen's caption to caption"
+    pygame.display.set_caption(caption)
 
 def reorderSprites():
     global sprites
