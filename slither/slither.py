@@ -7,7 +7,9 @@
 # and make a pull request!
 
 import pygame
+import cairosvg
 import sys, os, collections, warnings, math
+import tempfile, shutil, atexit
 
 WIDTH, HEIGHT = (800, 600)
 SCREEN_SIZE = (WIDTH, HEIGHT)
@@ -31,6 +33,12 @@ except AttributeError:
     warnings.warn("Couldn't find scripts dir, some functions may not work.")
     scriptdir = os.path.realpath(".")
 
+tempdir = tempfile.mkdtemp(prefix="PySlither-")
+print(tempdir)
+@atexit.register
+def _clean_temp_dir():
+    "Cleans the temp dir when the program quits"
+    shutil.rmtree(tempdir)
 
 def keysDown():
     "returns the keys that are currently pressed"
@@ -120,7 +128,15 @@ class Stage(object):
     # Functions shared by sprites
     def addCostume(self, costumePath, costumeName):
         '''Add a costume based on a given path and name.'''
-        costume = pygame.image.load(os.path.join(scriptdir, costumePath))
+        if os.path.splitext(costumePath)[1] in (".svg", ".svgx"):
+            name = os.path.splitext(os.path.basename(costumePath))[0] + ".png"
+            in_ = os.path.join(scriptdir, costumePath)
+            path = os.path.join(tempdir, name)
+            cairosvg.svg2png(url=in_, write_to=path)
+        else:
+            path = os.path.join(scriptdir, costumePath)
+        print(path)
+        costume = pygame.image.load(path)
         self.costumes[costumeName] = costume
         self._costumeName = costumeName # Switch to the new costume
 
