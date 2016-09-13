@@ -8,6 +8,25 @@
 
 import pygame
 import sys, os, collections, warnings, math
+import tempfile, shutil, atexit, subprocess, shlex
+
+# Check for ImageMagick
+if subprocess.call("identify -version", shell=True, stdout=subprocess.DEVNULL) != 0:
+    svgSupport = False
+    warnings.warn("Could not find ImageMagick, so there is no SVG support\n"
+                  "See https://github.com/PySlither/Slither/blob/master/Installing-ImageMagick.md "
+                  "for instructions on installing ImageMagick")
+else:
+    svgSupport = True
+
+tempdir = tempfile.mkdtemp(prefix="PySlither-")
+@atexit.register
+def _clean_temp_dir():
+    "Cleans the temp dir when the program quits"
+    shutil.rmtree(tempdir)
+
+class NoSVGSupportError(Exception):
+    pass
 
 WIDTH, HEIGHT = (800, 600)
 SCREEN_SIZE = (WIDTH, HEIGHT)
@@ -47,66 +66,106 @@ class Mouse:
     """A class for getting and setting mouse properties
     This is a static class, all functions should be called directly through the class"""
     _v = True
-    
+
     @staticmethod
     def buttonsPressed():
-        """Returns a three-tuple of bools that gives the state 
+        """Returns a three-tuple of bools that gives the state
         of the left, middle, and right buttons"""
         return tuple(bool(state) for state in pygame.mouse.get_pressed())
-    
+
     @staticmethod
     def leftPressed():
         return Mouse.buttonsPressed()[0]
-    
+
     @staticmethod
     def middlePressed():
         return Mouse.buttonsPressed()[1]
-    
+
     @staticmethod
     def rightPressed():
         return Mouse.buttonsPressed()[2]
-    
+
     @staticmethod
     def pos():
         return pygame.mouse.get_pos()
-    
+
     @staticmethod
     def xPos():
         return Mouse.pos()[0]
-    
+
     @staticmethod
     def yPos():
         return Mouse.pos()[1]
-    
+
     @staticmethod
     def relativeMovement():
         "Returns how much the mouse has moved since the last call to this function"
         return pygame.mouse.get_rel()
-    
+
     @staticmethod
     def setPos(x, y):
         pygame.mouse.set_pos(x, y)
-        
+
     @staticmethod
     def setXPos(x):
         pygame.mouse.set_pos(x, Mouse.yPos())
-        
+
     @staticmethod
     def setYPos(y):
         pygame.mouse.set_pos(Mouse.xPos(), y)
-        
+
     @staticmethod
     def isVisible():
         return Mouse._v
-    
+
     @staticmethod
     def setVisible(status):
         Mouse._v = pygame.mouse.set_visible(status)
-        
+
     @staticmethod
     def isFocused():
         return bool(pygame.mouse.get_focused())
-    
+
+#Costume classes
+class SVGCostume:
+    "A class that handles resizing the SVG correctly"
+    def __init__(self, costumePath, scale):
+        if not svgSupport:
+            raise NoSVGSupportError("You do not have cairosvg installed correctly")
+        self.costumePath = costumePath
+        self.scale = scale
+        d = subprocess.check_output('convert {} -format "%w %h" info:'.format(
+                                    shlex.quote(os.path.join(scriptdir, self.costumePath))),
+                                    shell=True)
+        self.width, self.height = map(int, d.split())
+        print(self.width, self.height, sep=", ")
+        self.createImage()
+
+    def createImage(self):
+        name = os.path.splitext(os.path.basename(self.costumePath))[0] + ".png"
+        in_ = os.path.join(scriptdir, self.costumePath)
+        path = os.path.join(tempdir, name)
+        subprocess.check_output("convert -density {den} -resize {w}x{h} {in_} {out}".format(
+                                                                                den=72*self.scale+5,
+                                                                                w=self.scale*self.width,
+                                                                                h=self.scale*self.height,
+                                                                                in_=shlex.quote(in_),
+                                                                                out=shlex.quote(path)),
+                              shell=True)
+        self.img = pygame.image.load(path)
+
+    def resize(self, scale):
+        self.scale = scale
+        self.createImage()
+
+class PNGCostume:
+    "Dummy class to make SVG and PNG costumes the same"
+    def __init__(self, img):
+        self.img = img
+    def resize(self, scale):
+        pass
+
+
 # Stage class
 class Stage(object):
     def __init__(self):
@@ -120,7 +179,11 @@ class Stage(object):
     # Functions shared by sprites
     def addCostume(self, costumePath, costumeName):
         '''Add a costume based on a given path and name.'''
-        costume = pygame.image.load(os.path.join(scriptdir, costumePath))
+        if os.path.splitext(costumePath)[1] in (".svg", ".svgx"):
+            costume = SVGCostume(costumePath, self.scale if hasattr(self, "scale") else 1)
+        else:
+            path = os.path.join(scriptdir, costumePath)
+            costume = PNGCostume(pygame.image.load(path))
         self.costumes[costumeName] = costume
         self._costumeName = costumeName # Switch to the new costume
 
@@ -170,7 +233,8 @@ class Sprite(Stage):
         self.ypos = 0 # Y Position
         self.direction = 0 # Direction is how much to change the direction, hence why it starts at 0 and not 90
         self.show = True
-        self.scale = 1 # How much to multiply it by in the scale
+        self.showBoundingBox = False
+        self._scale = 1 # How much to multiply it by in the scale
         self._zindex = 0 # How high up are we in the "z" axis?
         sprites.append(self) # Add this sprite to the global list of sprites
 
@@ -186,11 +250,20 @@ class Sprite(Stage):
         self._zindex = val
         reorderSprites()
 
+    @property
+    def scale(self):
+        return self._scale
+
+    @scale.setter
+    def scale(self, val):
+        self._scale = val
+        self.currentCostume.resize(self._scale)
+
     def goto(self, xpos, ypos):
         '''Go to xpos, ypos.'''
         self.xpos = xpos
         self.ypos = ypos
-    
+
     def moveSteps(self, numSteps):
         """Move numSteps steps in the current direction"""
         self.goto(self.xpos + math.cos(math.radians(self.direction)) * numSteps,
@@ -283,9 +356,9 @@ def blit(screen):
 
         for obj in sprites:
             if obj.isVisible(): # Check if the object is showing before we do anything
-                image = obj.currentCostume # So we can modify it and blit the modified version easily
+                image = obj.currentCostume.img # So we can modify it and blit the modified version easily
                 # These next few blocks of code check if the object has the defaults before doing anything.
-                if not obj.scale == 1:
+                if not obj.scale == 1 and not isinstance(obj.currentCostume, SVGCostume):
                     imageSize = image.get_size()
                     image = pygame.transform.scale(image, (int(imageSize[0] * obj.scale), int(imageSize[1] * obj.scale)))
                 if not obj.direction == 0:
@@ -293,6 +366,8 @@ def blit(screen):
                 new_rect = image.get_rect()
                 new_rect.center = (obj.xpos, obj.ypos)
                 screen.blit(image, new_rect)
+                if obj.showBoundingBox:
+                    pygame.draw.rect(screen, (0,0,0), new_rect, 5)
 
     #pygame.display.flip()
 
