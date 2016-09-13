@@ -1,5 +1,6 @@
 # usr/bin/env python3
 # svgTest.py - Test Slither's SVG support
+
 import slither
 
 if slither.svgSupport:
