@@ -8,3 +8,4 @@ nppBackup
 install.bat
 Thumbs.db
 site/
+.DS_Store
