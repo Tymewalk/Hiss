@@ -169,7 +169,7 @@ class PNGCostume:
 # Stage class
 class Stage(object):
     def __init__(self):
-        self.snakey = pygame.image.load(os.path.join(os.path.dirname(__file__), "snakey.png"))
+        self.snakey = PNGCostume(pygame.image.load(os.path.join(os.path.dirname(__file__), "snakey.png")))
         self.costumes = collections.OrderedDict({"costume0" : self.snakey})
         self._costumeNumber = 0
         self._costumeName = "costume0"
