@@ -352,7 +352,7 @@ def blit(screen):
         screen.fill(slitherStage.bgColor)
 
         if slitherStage.currentCostume:
-            screen.blit(pygame.transform.scale(slitherStage.currentCostume, SCREEN_SIZE), (0, 0))
+            screen.blit(pygame.transform.scale(slitherStage.currentCostume.img, SCREEN_SIZE), (0, 0))
 
         for obj in sprites:
             if obj.isVisible(): # Check if the object is showing before we do anything
