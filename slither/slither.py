@@ -12,6 +12,8 @@ import sys, os, collections, warnings, math
 WIDTH, HEIGHT = (800, 600)
 SCREEN_SIZE = (WIDTH, HEIGHT)
 
+fullScreen = False
+
 sprites = [] # List of all sprites
 clock = pygame.time.Clock() # Used to control framerate
 eventnames = ['QUIT', 'ACTIVEEVENT', 'KEYDOWN', 'KEYUP', 'MOUSEMOTION', 'MOUSEBUTTONUP', 'MOUSEBUTTONDOWN',
@@ -253,15 +255,32 @@ def blitText(text, x=0, y=0, size=12, font=False, fontPath=False, antialias=0, c
 
     #pygame.display.flip()
 
-def setup(caption=sys.argv[0]):
+def setup(caption=sys.argv[0], width=800, height=600):
     '''Sets up PyGame and returns a screen object that can be used with blit().'''
-    global globalscreen
+    global globalscreen, WIDTH, HEIGHT, SCREEN_SIZE
+    WIDTH = width
+    HEIGHT = height
+    SCREEN_SIZE = (WIDTH, HEIGHT)
     pygame.init()
     pygame.font.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
     caption = pygame.display.set_caption(caption)
     globalscreen = screen
     return screen
+
+def toggleFullScreen():
+    "Toggles fullscreen"
+    global fullScreen
+    fullScreen = not fullScreen
+    setFullScreen(fullScreen)
+
+def setFullScreen(mode):
+    "If mode is True, turns on full screen, otherwise, turns it off"
+    global screen
+    if mode:
+        screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN|pygame.HWSURFACE|pygame.DOUBLEBUF)
+    else:
+        screen = pygame.display.set_mode(SCREEN_SIZE)
 
 projectFPS = 60 # 60 is the default
 def setFPS(fps):
