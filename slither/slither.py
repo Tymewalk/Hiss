@@ -134,11 +134,13 @@ class SVGCostume:
             raise NoSVGSupportError("You do not have cairosvg installed correctly")
         self.costumePath = costumePath
         self.scale = scale
-        d = subprocess.check_output('convert {} -format "%w %h" info:'.format(
-                                    shlex.quote(os.path.join(scriptdir, self.costumePath))),
+        command = 'convert {} -format "%w %h" info:'.format(
+                                    '"' + shlex.quote(os.path.join(scriptdir, self.costumePath))[1:-1] + '"')
+        #print(command)
+        d = subprocess.check_output(command,
                                     shell=True)
         self.width, self.height = map(int, d.split())
-        print(self.width, self.height, sep=", ")
+        #print(self.width, self.height, sep=", ")
         self.createImage()
 
     def createImage(self):
@@ -149,14 +151,13 @@ class SVGCostume:
                                                                                 den=72*self.scale+5,
                                                                                 w=self.scale*self.width,
                                                                                 h=self.scale*self.height,
-                                                                                in_=shlex.quote(in_),
-                                                                                out=shlex.quote(path)),
+                                                                                in_='"'+shlex.quote(in_)[1:-1]+'"',
+                                                                                out='"'+shlex.quote(path)[1:-1]+'"'),
                               shell=True)
         self.img = pygame.image.load(path)
 
     def resize(self, scale):
         self.scale = scale
-        self.createImage()
 
 class PNGCostume:
     "Dummy class to make SVG and PNG costumes the same"
