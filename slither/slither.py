@@ -8,7 +8,11 @@
 
 import pygame
 import sys, os, collections, warnings, math
-import tempfile, shutil, atexit, subprocess, shlex
+import tempfile, shutil, atexit, subprocess
+try:
+    from shlex import quote
+except ImportError:
+    from pipes import quote
 
 _DEVNULL = open(os.devnull, "wb")
 
@@ -139,7 +143,7 @@ class SVGCostume:
         self.costumePath = costumePath
         self.scale = scale
         command = 'convert {} -format "%w %h" info:'.format(
-                                    '"' + shlex.quote(os.path.join(scriptdir, self.costumePath))[1:-1] + '"')
+                                    '"' + quote(os.path.join(scriptdir, self.costumePath))[1:-1] + '"')
         #print(command)
         d = subprocess.check_output(command,
                                     shell=True)
@@ -155,8 +159,8 @@ class SVGCostume:
                                                                                 den=72*self.scale+5,
                                                                                 w=self.scale*self.width,
                                                                                 h=self.scale*self.height,
-                                                                                in_='"'+shlex.quote(in_)[1:-1]+'"',
-                                                                                out='"'+shlex.quote(path)[1:-1]+'"'),
+                                                                                in_='"'+quote(in_)[1:-1]+'"',
+                                                                                out='"'+quote(path)[1:-1]+'"'),
                               shell=True)
         self.img = pygame.image.load(path)
 
