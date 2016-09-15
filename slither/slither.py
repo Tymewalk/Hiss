@@ -10,8 +10,10 @@ import pygame
 import sys, os, collections, warnings, math
 import tempfile, shutil, atexit, subprocess, shlex
 
+_DEVNULL = open(os.devnull, "wb")
+
 # Check for ImageMagick
-if subprocess.call("identify -version", shell=True, stdout=subprocess.DEVNULL) != 0:
+if subprocess.call("identify -version", shell=True, stdout=_DEVNULL) != 0:
     svgSupport = False
     warnings.warn("Could not find ImageMagick, so there is no SVG support\n"
                   "See https://github.com/PySlither/Slither/blob/master/Installing-ImageMagick.md "
