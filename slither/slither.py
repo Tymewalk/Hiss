@@ -139,7 +139,7 @@ class SVGCostume:
     "A class that handles resizing the SVG correctly"
     def __init__(self, costumePath, scale):
         if not svgSupport:
-            raise NoSVGSupportError("You do not have cairosvg installed correctly")
+            raise NoSVGSupportError("You do not have ImageMagick installed correctly")
         self.costumePath = costumePath
         self.scale = scale
         command = 'convert {} -format "%w %h" info:'.format(
