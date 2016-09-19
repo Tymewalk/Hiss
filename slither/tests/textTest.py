@@ -1,3 +1,5 @@
+#! usr/bin/env python3
+# textTest.py
 import slither
 
 slither.slitherStage.bgColor = (40, 222, 40)

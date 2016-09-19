@@ -8,6 +8,31 @@
 
 import pygame
 import sys, os, collections, warnings, math
+import tempfile, shutil, atexit, subprocess
+try:
+    from shlex import quote
+except ImportError:
+    from pipes import quote
+
+_DEVNULL = open(os.devnull, "wb")
+
+# Check for ImageMagick
+if subprocess.call("identify -version", shell=True, stdout=_DEVNULL) != 0:
+    svgSupport = False
+    warnings.warn("Could not find ImageMagick, so there is no SVG support\n"
+                  "See https://github.com/PySlither/Slither/blob/master/Installing-ImageMagick.md "
+                  "for instructions on installing ImageMagick")
+else:
+    svgSupport = True
+
+tempdir = tempfile.mkdtemp(prefix="PySlither-")
+@atexit.register
+def _clean_temp_dir():
+    "Cleans the temp dir when the program quits"
+    shutil.rmtree(tempdir)
+
+class NoSVGSupportError(Exception):
+    pass
 
 WIDTH, HEIGHT = (800, 600)
 SCREEN_SIZE = (WIDTH, HEIGHT)
@@ -109,10 +134,53 @@ class Mouse:
     def isFocused():
         return bool(pygame.mouse.get_focused())
 
+#Costume classes
+class SVGCostume:
+    "A class that handles resizing the SVG correctly"
+    def __init__(self, costumePath, scale):
+        if not svgSupport:
+            raise NoSVGSupportError("You do not have ImageMagick installed correctly")
+        self.costumePath = costumePath
+        self.scale = scale
+        command = 'convert {} -format "%w %h" info:'.format(
+                                    '"' + quote(os.path.join(scriptdir, self.costumePath))[1:-1] + '"')
+        #print(command)
+        d = subprocess.check_output(command,
+                                    shell=True)
+        self.width, self.height = map(int, d.split())
+        #print(self.width, self.height, sep=", ")
+        self.createImage()
+
+    def createImage(self):
+        name = os.path.splitext(os.path.basename(self.costumePath))[0] + ".png"
+        in_ = os.path.join(scriptdir, self.costumePath)
+        path = os.path.join(tempdir, name)
+        subprocess.check_output("convert -density {den} -resize {w}x{h} {in_} {out}".format(
+                                                                                den=72*self.scale+5,
+                                                                                w=self.scale*self.width,
+                                                                                h=self.scale*self.height,
+                                                                                in_='"'+quote(in_)[1:-1]+'"',
+                                                                                out='"'+quote(path)[1:-1]+'"'),
+                              shell=True)
+        self.img = pygame.image.load(path)
+
+    def resize(self, scale):
+        self.scale = scale
+        self.createImage()
+
+class PNGCostume:
+    "Dummy class to make SVG and PNG costumes the same"
+    def __init__(self, img):
+        self.img = img
+    def resize(self, scale):
+        pass
+
+
+
 # Stage class
 class Stage(object):
     def __init__(self):
-        self.snakey = pygame.image.load(os.path.join(os.path.dirname(__file__), "snakey.png"))
+        self.snakey = PNGCostume(pygame.image.load(os.path.join(os.path.dirname(__file__), "snakey.png")))
         self.costumes = collections.OrderedDict({"costume0" : self.snakey})
         self._costumeNumber = 0
         self._costumeName = "costume0"
@@ -122,7 +190,11 @@ class Stage(object):
     # Functions shared by sprites
     def addCostume(self, costumePath, costumeName):
         '''Add a costume based on a given path and name.'''
-        costume = pygame.image.load(os.path.join(scriptdir, costumePath))
+        if os.path.splitext(costumePath)[1] in (".svg", ".svgx"):
+            costume = SVGCostume(costumePath, self.scale if hasattr(self, "scale") else 1)
+        else:
+            path = os.path.join(scriptdir, costumePath)
+            costume = PNGCostume(pygame.image.load(path))
         self.costumes[costumeName] = costume
         self._costumeName = costumeName # Switch to the new costume
 
@@ -172,7 +244,8 @@ class Sprite(Stage):
         self.ypos = 0 # Y Position
         self.direction = 0 # Direction is how much to change the direction, hence why it starts at 0 and not 90
         self.show = True
-        self.scale = 1 # How much to multiply it by in the scale
+        self.showBoundingBox = False
+        self._scale = 1 # How much to multiply it by in the scale
         self._zindex = 0 # How high up are we in the "z" axis?
         sprites.append(self) # Add this sprite to the global list of sprites
 
@@ -187,6 +260,15 @@ class Sprite(Stage):
         #    raise ValueError("zindex must be a non-negative integer")
         self._zindex = val
         reorderSprites()
+
+    @property
+    def scale(self):
+        return self._scale
+
+    @scale.setter
+    def scale(self, val):
+        self._scale = val
+        self.currentCostume.resize(self._scale)
 
     def goto(self, xpos, ypos):
         '''Go to xpos, ypos.'''
@@ -209,8 +291,8 @@ class Sprite(Stage):
 
     def isTouching(self, collideSprite):
         '''Detects if one sprite is touching another.'''
-        ourRect = self.currentCostume.get_rect()
-        theirRect = collideSprite.currentCostume.get_rect()
+        ourRect = self.currentCostume.img.get_rect()
+        theirRect = collideSprite.currentCostume.img.get_rect()
         ourRect.center = (self.xpos, self.ypos)
         theirRect.center = (collideSprite.xpos, collideSprite.ypos)
         return ourRect.colliderect(theirRect)
@@ -302,13 +384,13 @@ def blit(screen):
         screen.fill(slitherStage.bgColor)
 
         if slitherStage.currentCostume:
-            screen.blit(pygame.transform.scale(slitherStage.currentCostume, SCREEN_SIZE), (0, 0))
+            screen.blit(pygame.transform.scale(slitherStage.currentCostume.img, SCREEN_SIZE), (0, 0))
 
         for obj in sprites:
             if obj.isVisible(): # Check if the object is showing before we do anything
-                image = obj.currentCostume # So we can modify it and blit the modified version easily
+                image = obj.currentCostume.img # So we can modify it and blit the modified version easily
                 # These next few blocks of code check if the object has the defaults before doing anything.
-                if not obj.scale == 1:
+                if not obj.scale == 1 and not isinstance(obj.currentCostume, SVGCostume):
                     imageSize = image.get_size()
                     image = pygame.transform.scale(image, (int(imageSize[0] * obj.scale), int(imageSize[1] * obj.scale)))
                 if not obj.direction == 0:
@@ -316,6 +398,8 @@ def blit(screen):
                 new_rect = image.get_rect()
                 new_rect.center = (obj.xpos, obj.ypos)
                 screen.blit(image, new_rect)
+                if obj.showBoundingBox:
+                    pygame.draw.rect(screen, (0,0,0), new_rect, 5)
 
     #pygame.display.flip()
 

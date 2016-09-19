@@ -1,3 +1,5 @@
+#! usr/bin/env python3
+# basicTest.py
 import slither
 
 snakey = slither.Sprite()

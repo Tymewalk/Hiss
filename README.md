@@ -16,7 +16,7 @@ If that doesn't work, run `python setup.py bdist_wheel`, and then run `pip insta
 If it still fails, make sure you have `setuptools` fully updated and properly installed.<br />
 Remember to add `import slither` in your script.<br />
 
-Note that you must have PyGame installed in order to use Slither.
+Note that you must have PyGame installed in order to use Slither. Also, in order to have SVG support, you need to [install ImageMagick](Installing-ImageMagick.md).
 
 ## Why use Slither?
 Those just getting started with Python after using Scratch may want to go straight from one GUI to another. Slither allows those people to quickly make simple projects in a matter of minutes, while also learning Python.

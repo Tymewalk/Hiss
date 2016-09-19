@@ -29,7 +29,7 @@ def run_a_frame():
         controls["speed"] = max(controls["speed"] - 0.2, 0)
     # Set the sprites direction...
     sprite.direction = controls["turn"]
-    # ... and move it speed steps 
+    # ... and move it speed steps
     sprite.moveSteps(controls["speed"])
     # Add wraparound checks.
     if sprite.xpos > slither.WIDTH:
@@ -47,5 +47,3 @@ print("Use the left and right arrows to turn.\nUse the space key to go forward")
 slither.setup("Move!")
 # and start it running!
 slither.runMainLoop(run_a_frame)
-
-
