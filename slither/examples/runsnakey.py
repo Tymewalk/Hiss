@@ -1,7 +1,7 @@
 import slither # Get slither functions
 
 background = slither.slitherStage # Make 'background' the stage
-background.addCostume('grass.png', 'grass') # Add costume 'grass' to background
+background.addCostume('./assets/grass.png', 'grass') # Add costume 'grass' to background
 background.costumeName = 'grass' # Set the costume to grass
 
 snakey = slither.Sprite() # Make a sprite named snakey (default)

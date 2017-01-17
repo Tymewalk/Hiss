@@ -5,7 +5,7 @@ dogecount = 1 # Initialize iterator 'dogecount'
 
 while dogecount != 30: # Produce 30 doges
     doge[dogecount] = slither.Sprite() # Make each doge a sprite
-    doge[dogecount].addCostume('doge.png', 'doge') # Give them the costume 'doge'
+    doge[dogecount].addCostume('./assets/doge.png', 'doge') # Give them the costume 'doge'
     doge[dogecount].costumeName = 'doge' # Set the doges costume to 'doge'
     doge[dogecount].ypos = random.randint(0, 400) # Make the doges go to a random y position
     doge[dogecount].xpos = random.randint(0, 400) # Make the doges go to a random x position
