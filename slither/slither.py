@@ -19,7 +19,7 @@ _DEVNULL = open(os.devnull, "wb")
 # Check for ImageMagick
 if subprocess.call("identify -version", shell=True, stdout=_DEVNULL) != 0:
     svgSupport = False
-    warnings.warn("Could not find ImageMagick, so there is no SVG support\n"
+    print("Could not find ImageMagick, so there is no SVG support\n"
                   "See https://github.com/PySlither/Slither/blob/master/Installing-ImageMagick.md "
                   "for instructions on installing ImageMagick")
 else:
