@@ -10,7 +10,7 @@ Slither is a Python module that uses PyGame to bring Scratch-like features to Py
 ### Through `pip`
 Run `pip install slither`.
 
-*Note*: Linux/Unix users without the proper permissions may need to run it as `sudo pip install slither`.
+*Note*: Linux/Unix users without the proper permissions may need to run it as `sudo pip3 install slither`.
 
 *Note*: Python 3 uses `pip3`.
 
